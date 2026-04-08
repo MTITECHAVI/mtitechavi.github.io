@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phikra - We think, therefore You are.</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Tajawal:wght@400;500;700;800&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=panchang@400,600,700&f[]=excon@400,500&f[]=satoshi@300,400,600&display=swap"
+        rel="stylesheet"
+    >
     <style>
         :root {
             --phikra-bg: #272727;
@@ -11,6 +24,25 @@
             --phikra-text-bright: #ECE0DD;
             --phikra-red: #DF0841;
             --phikra-red-deep: #971535;
+            --font-display: "Panchang", system-ui, sans-serif;
+            --font-body: "Excon", system-ui, -apple-system, Segoe UI, sans-serif;
+            --font-tagline: "Satoshi", system-ui, -apple-system, Segoe UI, sans-serif;
+            --neon-glow:
+                0 0 12px rgba(255, 77, 125, 0.85),
+                0 0 28px rgba(223, 8, 65, 0.55),
+                0 0 48px rgba(151, 21, 53, 0.35);
+            --neon-text:
+                0 0 8px rgba(255, 77, 125, 0.48),
+                0 0 18px rgba(223, 8, 65, 0.3),
+                0 0 32px rgba(151, 21, 53, 0.18);
+            --neon-text-strong:
+                0 0 9px rgba(255, 77, 125, 0.55),
+                0 0 20px rgba(223, 8, 65, 0.34),
+                0 0 36px rgba(151, 21, 53, 0.22);
+            --cyber-cyan: rgba(64, 252, 255, 0.95);
+            --cyber-magenta: rgba(255, 48, 220, 0.92);
+            --font-darija: "IBM Plex Sans Arabic", "Segoe UI", "Arabic UI Text", Tahoma, sans-serif;
+            --font-darija-display: "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
         }
 
         * {
@@ -18,7 +50,7 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+            font-family: var(--font-body);
             text-align: center;
             margin: 0;
             min-height: 100vh;
@@ -30,41 +62,987 @@
             background-color: var(--phikra-bg);
             color: var(--phikra-text);
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
-        h1 {
-            margin: 0 0 0.75rem;
-            font-size: clamp(1.75rem, 5vw, 2.25rem);
+        .hero-title {
+            margin: 0 0 1rem;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 3rem);
             font-weight: 700;
-            color: var(--phikra-text-bright);
-            letter-spacing: -0.02em;
+            line-height: 1.12;
+            text-shadow: var(--neon-text), 0 2px 18px rgba(39, 39, 39, 0.55);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.35em 0.45em;
         }
 
-        h1::after {
+        .hero-title__lead {
+            color: var(--phikra-text-bright);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .cyber-name-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cyber-name {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05em;
+            letter-spacing: 0.14em;
+            text-transform: none;
+            color: var(--phikra-text-bright);
+            text-shadow:
+                var(--neon-text),
+                -2px 0 18px rgba(64, 252, 255, 0.45),
+                2px 0 18px rgba(255, 48, 220, 0.4),
+                0 0 28px rgba(0, 240, 255, 0.35),
+                0 0 32px rgba(255, 0, 200, 0.22);
+            animation: cyber-chroma-flicker 3.6s steps(1, end) infinite;
+        }
+
+        .cyber-name::before,
+        .cyber-name::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .cyber-name::before {
+            z-index: -1;
+            color: var(--cyber-cyan);
+            text-shadow:
+                0 0 14px rgba(64, 252, 255, 0.85),
+                0 0 28px rgba(0, 240, 255, 0.5);
+            clip-path: inset(0 0 0 0);
+            animation: cyber-glitch-a 2.1s infinite steps(1, end);
+        }
+
+        .cyber-name::after {
+            z-index: -2;
+            color: var(--cyber-magenta);
+            text-shadow:
+                0 0 14px rgba(255, 48, 220, 0.8),
+                0 0 28px rgba(255, 0, 200, 0.45);
+            animation: cyber-glitch-b 1.85s infinite steps(1, end);
+        }
+
+        @keyframes cyber-chroma-flicker {
+            0%,
+            94%,
+            100% {
+                text-shadow:
+                    var(--neon-text),
+                    -2px 0 18px rgba(64, 252, 255, 0.45),
+                    2px 0 18px rgba(255, 48, 220, 0.4),
+                    0 0 28px rgba(0, 240, 255, 0.35),
+                    0 0 32px rgba(255, 0, 200, 0.22);
+            }
+            95% {
+                text-shadow:
+                    var(--neon-text),
+                    -5px 0 22px rgba(64, 252, 255, 0.65),
+                    5px 0 22px rgba(255, 48, 220, 0.55),
+                    0 0 36px rgba(0, 240, 255, 0.5),
+                    0 0 40px rgba(255, 0, 200, 0.35);
+            }
+            96% {
+                text-shadow:
+                    var(--neon-text),
+                    3px 0 20px rgba(64, 252, 255, 0.5),
+                    -4px 0 20px rgba(255, 48, 220, 0.45),
+                    0 0 30px rgba(223, 8, 65, 0.4);
+            }
+            97%,
+            99% {
+                text-shadow:
+                    var(--neon-text),
+                    -2px 0 18px rgba(64, 252, 255, 0.45),
+                    2px 0 18px rgba(255, 48, 220, 0.4),
+                    0 0 28px rgba(0, 240, 255, 0.35),
+                    0 0 32px rgba(255, 0, 200, 0.22);
+            }
+        }
+
+        @keyframes cyber-glitch-a {
+            0%,
+            8%,
+            18%,
+            28%,
+            38%,
+            100% {
+                transform: translate(0, 0);
+                clip-path: inset(0 0 100% 0);
+                opacity: 0;
+            }
+            9% {
+                transform: translate(-4px, 2px);
+                clip-path: inset(8% 0 52% 0);
+                opacity: 1;
+            }
+            10% {
+                transform: translate(5px, -2px);
+                clip-path: inset(38% 0 18% 0);
+                opacity: 0.95;
+            }
+            11% {
+                transform: translate(-2px, 3px);
+                clip-path: inset(0 0 35% 0);
+                opacity: 0.85;
+            }
+            12%,
+            17% {
+                transform: translate(0, 0);
+                clip-path: inset(0 0 100% 0);
+                opacity: 0;
+            }
+            19% {
+                transform: translate(4px, 1px);
+                clip-path: inset(55% 0 12% 0);
+                opacity: 0.9;
+            }
+            20% {
+                opacity: 0;
+            }
+            29% {
+                transform: translate(-5px, -1px);
+                clip-path: inset(20% 0 45% 0);
+                opacity: 1;
+            }
+            30% {
+                transform: translate(3px, 2px);
+                clip-path: inset(60% 0 8% 0);
+                opacity: 0.88;
+            }
+            31% {
+                opacity: 0;
+            }
+            39% {
+                transform: translate(-3px, 0);
+                clip-path: inset(0 15% 40% 0);
+                opacity: 0.92;
+            }
+            40% {
+                opacity: 0;
+            }
+            72%,
+            76% {
+                transform: translate(0, 0);
+                clip-path: inset(0 0 100% 0);
+                opacity: 0;
+            }
+            73% {
+                transform: translate(5px, -3px);
+                clip-path: inset(12% 0 58% 0);
+                opacity: 1;
+            }
+            74% {
+                transform: translate(-4px, 2px);
+                clip-path: inset(45% 0 25% 0);
+                opacity: 0.95;
+            }
+            75% {
+                transform: translate(2px, -2px);
+                clip-path: inset(0 0 0 0);
+                opacity: 0.55;
+            }
+            82%,
+            90% {
+                transform: translate(0, 0);
+                clip-path: inset(0 0 100% 0);
+                opacity: 0;
+            }
+            83% {
+                transform: translate(-5px, 2px);
+                clip-path: inset(25% 0 48% 0);
+                opacity: 1;
+            }
+            84% {
+                transform: translate(6px, -2px);
+                clip-path: inset(50% 0 15% 0);
+                opacity: 0.98;
+            }
+            85% {
+                transform: translate(-2px, -3px);
+                clip-path: inset(70% 0 5% 0);
+                opacity: 0.9;
+            }
+            86% {
+                transform: translate(3px, 3px);
+                clip-path: inset(0 0 62% 0);
+                opacity: 0.75;
+            }
+            87%,
+            89% {
+                opacity: 0;
+            }
+            91% {
+                transform: translate(-4px, 1px);
+                clip-path: inset(33% 0 40% 0);
+                opacity: 0.95;
+            }
+            92% {
+                transform: translate(4px, -1px);
+                opacity: 0.85;
+            }
+            93% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes cyber-glitch-b {
+            0%,
+            7%,
+            16%,
+            26%,
+            36%,
+            100% {
+                transform: translate(0, 0);
+                clip-path: inset(100% 0 0 0);
+                opacity: 0;
+            }
+            8% {
+                transform: translate(4px, -3px);
+                clip-path: inset(0 0 48% 0);
+                opacity: 0.95;
+            }
+            9% {
+                transform: translate(-5px, 2px);
+                clip-path: inset(22% 0 52% 0);
+                opacity: 1;
+            }
+            10% {
+                opacity: 0;
+            }
+            17% {
+                transform: translate(3px, 3px);
+                clip-path: inset(65% 0 10% 0);
+                opacity: 0.88;
+            }
+            18% {
+                opacity: 0;
+            }
+            27% {
+                transform: translate(-4px, -2px);
+                clip-path: inset(0 0 38% 0);
+                opacity: 0.92;
+            }
+            28% {
+                opacity: 0;
+            }
+            37% {
+                transform: translate(5px, 1px);
+                clip-path: inset(40% 0 35% 0);
+                opacity: 0.9;
+            }
+            38% {
+                opacity: 0;
+            }
+            58%,
+            62% {
+                transform: translate(0, 0);
+                clip-path: inset(100% 0 0 0);
+                opacity: 0;
+            }
+            59% {
+                transform: translate(-3px, -4px);
+                clip-path: inset(15% 0 55% 0);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(4px, 2px);
+                clip-path: inset(55% 0 20% 0);
+                opacity: 0.9;
+            }
+            61% {
+                opacity: 0;
+            }
+            78%,
+            88%,
+            98% {
+                transform: translate(0, 0);
+                clip-path: inset(100% 0 0 0);
+                opacity: 0;
+            }
+            79% {
+                transform: translate(5px, -2px);
+                clip-path: inset(8% 0 72% 0);
+                opacity: 0.98;
+            }
+            80% {
+                transform: translate(-6px, 3px);
+                clip-path: inset(48% 0 22% 0);
+                opacity: 1;
+            }
+            81% {
+                transform: translate(2px, -3px);
+                clip-path: inset(78% 0 5% 0);
+                opacity: 0.85;
+            }
+            82% {
+                opacity: 0;
+            }
+            89% {
+                transform: translate(-4px, 2px);
+                clip-path: inset(30% 0 45% 0);
+                opacity: 0.95;
+            }
+            90% {
+                opacity: 0;
+            }
+            99% {
+                transform: translate(3px, 2px);
+                clip-path: inset(62% 0 15% 0);
+                opacity: 0.8;
+            }
+        }
+
+        .tagline {
+            margin: 0;
+            font-family: var(--font-tagline);
+            font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--phikra-text);
+            opacity: 0.88;
+            letter-spacing: 0.04em;
+            text-transform: none;
+            line-height: 1.45;
+            text-shadow: var(--neon-text), 0 1px 14px rgba(39, 39, 39, 0.5);
+        }
+
+        .tagline .tagline-you {
+            font-family: var(--font-tagline);
+            font-style: normal;
+            font-weight: 600;
+            color: #f43f68;
+            letter-spacing: 0.06em;
+            text-shadow: var(--neon-text-strong), 0 1px 12px rgba(39, 39, 39, 0.45);
+        }
+
+        .darija {
+            margin-top: 1.45rem;
+            padding-top: 0.25rem;
+            font-family: var(--font-darija);
+            position: relative;
+        }
+
+        .darija::before {
             content: "";
             display: block;
-            width: 3rem;
-            height: 3px;
-            margin: 1rem auto 0;
-            background: linear-gradient(90deg, var(--phikra-red-deep), var(--phikra-red));
-            border-radius: 2px;
+            width: min(13rem, 62vw);
+            max-width: 100%;
+            height: 1px;
+            margin: 0 auto 1.1rem;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(64, 252, 255, 0.14) 18%,
+                rgba(236, 224, 221, 0.06) 40%,
+                rgba(223, 8, 65, 0.32) 50%,
+                rgba(236, 224, 221, 0.06) 60%,
+                rgba(255, 48, 220, 0.14) 82%,
+                transparent 100%
+            );
+            box-shadow:
+                0 0 12px rgba(223, 8, 65, 0.07),
+                0 0 20px rgba(64, 252, 255, 0.05);
         }
 
-        p {
+        .darija__title {
+            margin: 0 0 0.55rem;
+            font-family: var(--font-darija-display);
+            font-size: clamp(1.45rem, 4.2vw, 2rem);
+            font-weight: 800;
+            color: var(--phikra-text-bright);
+            letter-spacing: 0.02em;
+            line-height: 1.35;
+            text-shadow: var(--neon-text), 0 1px 12px rgba(39, 39, 39, 0.45);
+        }
+
+        .darija__tagline {
             margin: 0;
-            font-size: 1.125rem;
+            font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+            font-weight: 300;
             color: var(--phikra-text);
+            opacity: 0.9;
+            line-height: 1.65;
+            text-shadow: var(--neon-text), 0 1px 10px rgba(39, 39, 39, 0.4);
+        }
+
+        .darija__tagline .tagline-you {
+            font-weight: 600;
+            color: #f43f68;
+            text-shadow: var(--neon-text-strong), 0 1px 10px rgba(39, 39, 39, 0.35);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 38rem;
+            padding: 0 0.5rem;
+        }
+
+        .social {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 1.65rem;
+        }
+
+        .social__link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            color: rgba(236, 224, 221, 0.42);
+            text-decoration: none;
+            border: 1px solid rgba(236, 224, 221, 0.1);
+            border-radius: 0.55rem;
+            background: rgba(18, 18, 18, 0.35);
+            box-shadow: none;
+            transition:
+                color 0.2s ease,
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .social__link:hover {
+            color: rgba(236, 224, 221, 0.78);
+            border-color: rgba(223, 8, 65, 0.22);
+            background: rgba(18, 18, 18, 0.5);
+            box-shadow: 0 0 12px rgba(223, 8, 65, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .social__link:focus-visible {
+            outline: none;
+            border-color: rgba(223, 8, 65, 0.35);
+            color: rgba(236, 224, 221, 0.9);
+            box-shadow:
+                0 0 0 2px var(--phikra-bg),
+                0 0 14px rgba(223, 8, 65, 0.12);
+        }
+
+        .social__link svg {
+            width: 1.05rem;
+            height: 1.05rem;
             opacity: 0.92;
+        }
+
+        .social__link:hover svg {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .social__link {
+                transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .social__link:hover {
+                transform: none;
+            }
+        }
+
+        .quote-marquee {
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+            height: 1.5rem;
+            opacity: 0.32;
+        }
+
+        .quote-marquee--top {
+            top: 0;
+            border-bottom: 1px solid rgba(223, 8, 65, 0.08);
+        }
+
+        .quote-marquee--bottom {
+            bottom: 0;
+            border-top: 1px solid rgba(223, 8, 65, 0.08);
+        }
+
+        .quote-marquee__track {
+            display: flex;
+            width: max-content;
+            font-family: var(--font-tagline);
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--phikra-text);
+            white-space: nowrap;
+            line-height: 1.5rem;
+            text-shadow: var(--neon-text);
+            animation: marquee-left 72s linear infinite;
+        }
+
+        .quote-marquee--bottom .quote-marquee__track {
+            animation-name: marquee-right;
+        }
+
+        .quote-marquee__group {
+            display: flex;
+            flex-shrink: 0;
+            padding-right: 3rem;
+        }
+
+        .quote-marquee__sep {
+            padding: 0 1.75rem;
+            color: rgba(236, 224, 221, 0.35);
+            font-weight: 300;
+        }
+
+        .quote-marquee__team {
+            text-transform: none;
+            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 0.09em;
+            color: rgba(244, 232, 228, 0.78);
+            text-shadow:
+                0 0 12px rgba(223, 8, 65, 0.14),
+                0 0 22px rgba(223, 8, 65, 0.06);
+        }
+
+        .quote-marquee__team-inner::before {
+            content: "⁂ ";
+            font-style: normal;
+            opacity: 0.4;
+            letter-spacing: 0;
+        }
+
+        .quote-marquee__team--wait {
+            font-weight: 400;
+            color: rgba(236, 224, 221, 0.52);
+            text-shadow: 0 0 10px rgba(223, 8, 65, 0.07);
+        }
+
+        .quote-marquee__team--wait .quote-marquee__team-inner::before {
+            content: "… ";
+            opacity: 0.45;
+        }
+
+        @keyframes marquee-left {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-right {
+            from {
+                transform: translateX(-50%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .ascii-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.72;
+            -webkit-mask-image: radial-gradient(
+                ellipse 125% 100% at 50% 45%,
+                #000 0%,
+                #000 58%,
+                rgba(0, 0, 0, 0.65) 78%,
+                transparent 98%
+            );
+            mask-image: radial-gradient(
+                ellipse 125% 100% at 50% 45%,
+                #000 0%,
+                #000 58%,
+                rgba(0, 0, 0, 0.65) 78%,
+                transparent 98%
+            );
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.26;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 120px 120px;
+            mix-blend-mode: overlay;
         }
 
         ::selection {
             background: var(--phikra-red-deep);
             color: var(--phikra-text-bright);
         }
+
+        .ascii-stage {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+            font-size: clamp(0.78rem, 2.35vw, 1.08rem);
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            color: #f43f68;
+            text-shadow: var(--neon-glow);
+            white-space: pre;
+            text-align: left;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .grain-overlay {
+                opacity: 0.14;
+            }
+
+            .ascii-bg {
+                opacity: 0.22;
+            }
+
+            .ascii-stage {
+                text-shadow: 0 0 8px rgba(223, 8, 65, 0.4);
+            }
+
+            .quote-marquee__track {
+                animation: none;
+                justify-content: center;
+                width: 100%;
+                flex-wrap: wrap;
+                white-space: normal;
+                text-align: center;
+                height: auto;
+                min-height: 1.5rem;
+                padding: 0 0.75rem;
+            }
+
+            .quote-marquee__group:last-child {
+                display: none;
+            }
+
+            .cyber-name {
+                animation: none;
+            }
+
+            .cyber-name::before,
+            .cyber-name::after {
+                animation: none;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-        <h1>Welcome to Phikra</h1>
-        <p>Coming soon 🚀</p>
+        <div class="ascii-bg" aria-hidden="true">
+            <pre id="ascii-anim" class="ascii-stage"></pre>
+        </div>
+
+        <div class="grain-overlay" aria-hidden="true"></div>
+
+        <div class="quote-marquee quote-marquee--top" aria-hidden="true">
+            <div class="quote-marquee__track">
+                <span class="quote-marquee__group">
+                    <span>I think, therefore I am. — Descartes</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">A. Bet. — "Life is Hard, be harder"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>The unexamined life is not worth living. — Socrates</span><span class="quote-marquee__sep">·</span>
+                    <span>Sapere aude. — Kant</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">S. Ala. — "Nothing is Forever"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>We are what we repeatedly do. — Aristotle</span><span class="quote-marquee__sep">·</span>
+                    <span>Imagination is more important than knowledge. — Einstein</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">M. Ben. — "Real Eyes realize real lies"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>The medium is the message. — McLuhan</span><span class="quote-marquee__sep">·</span>
+                    <span>Stay hungry, stay foolish. — Stewart Brand</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">Pandito — "Eafak Qulo l Ikram tb3ed mni"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>In the middle of difficulty lies opportunity. — Einstein</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">A. Bou. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">B. Tem — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">I. Idr — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Aya — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">B. Tai — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                </span>
+                <span class="quote-marquee__group">
+                    <span>I think, therefore I am. — Descartes</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">A. Bet. — "Life is Hard, be harder"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>The unexamined life is not worth living. — Socrates</span><span class="quote-marquee__sep">·</span>
+                    <span>Sapere aude. — Kant</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">S. Ala. — "Nothing is Forever"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>We are what we repeatedly do. — Aristotle</span><span class="quote-marquee__sep">·</span>
+                    <span>Imagination is more important than knowledge. — Einstein</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">M. Ben. — "Real Eyes realize real lies"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>The medium is the message. — McLuhan</span><span class="quote-marquee__sep">·</span>
+                    <span>Stay hungry, stay foolish. — Stewart Brand</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team"><span class="quote-marquee__team-inner">Pandito — "Eafak Qulo l Ikram tb3ed mni"</span></span><span class="quote-marquee__sep">·</span>
+                    <span>In the middle of difficulty lies opportunity. — Einstein</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">A. Bou. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">B. Tem — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">I. Idr — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Aya — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">B. Tai — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="quote-marquee quote-marquee--bottom" aria-hidden="true">
+            <div class="quote-marquee__track">
+                <span class="quote-marquee__group">
+                    <span>Cogito, ergo sum. — Descartes</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">F. Kho. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Knowledge speaks, wisdom listens. — Hendrix</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">R. Mti — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Well done is better than well said. — Franklin</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">H. Lah — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Not all those who wander are lost. — Tolkien</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Loubna — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Simplicity is the ultimate sophistication. — da Vinci</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Alae — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>What we think, we become. — Buddha</span><span class="quote-marquee__sep">·</span>
+                    <span>Design is intelligence made visible. — Rand</span><span class="quote-marquee__sep">·</span>
+                    <span>Make it simple, but significant. — Armani</span><span class="quote-marquee__sep">·</span>
+                </span>
+                <span class="quote-marquee__group">
+                    <span>Cogito, ergo sum. — Descartes</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">F. Kho. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Knowledge speaks, wisdom listens. — Hendrix</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">R. Mti — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Well done is better than well said. — Franklin</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">H. Lah — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Not all those who wander are lost. — Tolkien</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Loubna — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>Simplicity is the ultimate sophistication. — da Vinci</span><span class="quote-marquee__sep">·</span>
+                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Alae — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
+                    <span>What we think, we become. — Buddha</span><span class="quote-marquee__sep">·</span>
+                    <span>Design is intelligence made visible. — Rand</span><span class="quote-marquee__sep">·</span>
+                    <span>Make it simple, but significant. — Armani</span><span class="quote-marquee__sep">·</span>
+                </span>
+            </div>
+        </div>
+
+        <main class="content">
+            <h1 class="hero-title">
+                <span class="hero-title__lead">This is</span>
+                <span class="cyber-name-wrap"><span class="cyber-name" data-text="Phikra">Phikra</span></span>
+            </h1>
+            <p class="tagline">We think, therefore <span class="tagline-you">You</span> are.</p>
+
+            <section class="darija" lang="ary" dir="rtl" translate="no">
+                <p class="darija__title">هادي هي فكرة</p>
+                <p class="darija__tagline" lang="ary">
+                    كنفكرو، إذن <span class="tagline-you">نتوما</span> كاينين.
+                </p>
+            </section>
+
+            <nav class="social" aria-label="Social media links">
+                <a
+                    class="social__link"
+                    href="https://www.instagram.com/phikra/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Phikra on Instagram"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                        <circle cx="12" cy="12" r="3.75" />
+                        <circle cx="17.25" cy="6.75" r="0.9" fill="currentColor" stroke="none" />
+                    </svg>
+                </a>
+                <a
+                    class="social__link"
+                    href="https://www.youtube.com/@phikra"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Phikra on YouTube"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21.6 8.2c-.2-1.1-1-1.9-2-2.1C17.8 5.8 12 5.8 12 5.8s-5.8 0-7.6.3c-1 .2-1.8 1-2 2.1C2.2 10 2.2 12 2.2 12s0 2 .4 3.8c.2 1.1 1 1.9 2 2.1 1.8.3 7.6.3 7.6.3s5.8 0 7.6-.3c1-.2 1.8-1 2-2.1.4-1.8.4-3.8.4-3.8s0-2-.4-3.8z" />
+                        <path fill="currentColor" stroke="none" d="M10 9.9v4.2l3.6-2.1-3.6-2.1z" />
+                    </svg>
+                </a>
+                <a
+                    class="social__link"
+                    href="https://www.linkedin.com/company/phikra/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Phikra on LinkedIn"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path fill="currentColor" stroke="none" d="M8.2 10.2h2v7.5h-2v-7.5zm1-2.3c-.7 0-1.2.5-1.2 1.2s.5 1.2 1.2 1.2 1.2-.5 1.2-1.2-.5-1.2-1.2-1.2z" />
+                        <path fill="currentColor" stroke="none" d="M13.4 10.2h1.9v1c.4-.7 1.3-1.2 2.4-1.2 2.2 0 3.3 1.4 3.3 3.6v4.1h-2v-3.8c0-1.2-.4-2-1.5-2-1.1 0-1.7.7-1.7 2v3.8h-2v-7.5z" />
+                    </svg>
+                </a>
+                <a
+                    class="social__link"
+                    href="https://github.com/mtitechavi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Phikra on GitHub"
+                >
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.091-.646.35-1.084.635-1.334-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.269 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.291 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.138 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"
+                        />
+                    </svg>
+                </a>
+            </nav>
+        </main>
+
+        <script>
+            (function () {
+                var wrap = document.querySelector(".ascii-bg");
+                var pre = document.getElementById("ascii-anim");
+                if (!wrap || !pre) return;
+
+                var headGlyphs = ".*@o+01#%&/|><=-ABCDEFGHXYZ";
+                var cols = 40;
+                var rows = 14;
+                var streams = [];
+                var grid = [];
+
+                function initStreams() {
+                    streams.length = 0;
+                    if (cols < 4) return;
+                    var count = Math.min(56, Math.max(18, ((cols * 0.58) | 0)));
+                    var step = cols / count;
+                    var i;
+                    var base;
+                    var jitter;
+                    var col;
+                    for (i = 0; i < count; i++) {
+                        base = (i + 0.5) * step;
+                        jitter = (Math.random() - 0.5) * Math.min(2.75, step * 0.6);
+                        col = (base + jitter) | 0;
+                        col = Math.max(0, Math.min(cols - 1, col));
+                        streams.push({
+                            col: col,
+                            y: Math.random() * -rows * 1.25 - (i % 9) * 2.5,
+                            speed: 0.11 + Math.random() * 0.2,
+                            len: 10 + ((Math.random() * 14) | 0)
+                        });
+                    }
+                }
+
+                function measureCharWidth() {
+                    var style = window.getComputedStyle(pre);
+                    var probe = document.createElement("span");
+                    probe.style.cssText =
+                        "position:absolute;visibility:hidden;white-space:pre;font:" +
+                        style.font +
+                        ";letter-spacing:" +
+                        style.letterSpacing;
+                    probe.textContent = "M";
+                    document.body.appendChild(probe);
+                    var w = probe.offsetWidth || parseFloat(style.fontSize) * 0.62;
+                    document.body.removeChild(probe);
+                    return w;
+                }
+
+                function layout() {
+                    var cw = measureCharWidth();
+                    var fs = parseFloat(window.getComputedStyle(pre).fontSize) || 12;
+                    var w = wrap.clientWidth;
+                    var h = wrap.clientHeight;
+                    var nc = Math.max(24, (w / cw) | 0);
+                    var nr = Math.max(16, (h / fs) | 0);
+                    if (nc !== cols || nr !== rows) {
+                        cols = nc;
+                        rows = nr;
+                        initStreams();
+                    }
+                }
+
+                function trailChar(k, len) {
+                    var f = k / len;
+                    if (f < 0.14) return ":";
+                    if (f < 0.28) return "/";
+                    if (f < 0.42) return ".";
+                    if (f < 0.56) return "'";
+                    if (f < 0.7) return ",";
+                    if (f < 0.84) return "`";
+                    if (f < 0.93) return ";";
+                    return " ";
+                }
+
+                function tick() {
+                    var x;
+                    var y;
+                    var k;
+                    var head;
+                    var s;
+                    var si;
+                    for (y = 0; y < rows; y++) {
+                        if (!grid[y]) grid[y] = new Array(cols);
+                        for (x = 0; x < cols; x++) grid[y][x] = " ";
+                    }
+                    for (si = 0; si < streams.length; si++) {
+                        s = streams[si];
+                        s.y += s.speed;
+                        if (s.y - s.len > rows + 4) {
+                            s.y = -2 - Math.random() * (rows * 0.55);
+                            s.len = 10 + ((Math.random() * 14) | 0);
+                            s.speed = 0.095 + Math.random() * 0.22;
+                        }
+                        head = s.y | 0;
+                        for (k = 0; k < s.len; k++) {
+                            var yy = head - k;
+                            if (yy < 0 || yy >= rows) continue;
+                            if (k === 0) {
+                                grid[yy][s.col] =
+                                    headGlyphs[(Math.random() * headGlyphs.length) | 0];
+                            } else {
+                                grid[yy][s.col] = trailChar(k, s.len);
+                            }
+                        }
+                    }
+                    var lines = new Array(rows);
+                    for (y = 0; y < rows; y++) lines[y] = grid[y].join("");
+                    pre.textContent = lines.join("\n");
+                    requestAnimationFrame(tick);
+                }
+
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    pre.textContent = "";
+                    return;
+                }
+
+                if (typeof ResizeObserver !== "undefined") {
+                    var ro = new ResizeObserver(function () {
+                        layout();
+                    });
+                    ro.observe(wrap);
+                } else {
+                    window.addEventListener("resize", layout);
+                }
+                layout();
+                requestAnimationFrame(tick);
+            })();
+        </script>
 </body>
 </html>

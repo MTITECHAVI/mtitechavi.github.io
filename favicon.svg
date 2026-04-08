@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Phikra">
+    <title>Phikra</title>
+    <rect width="32" height="32" rx="8" fill="#272727"/>
+    <g fill="#ECE0DD">
+        <circle cx="10" cy="14" r="2.25"/>
+        <circle cx="16" cy="14" r="2.25"/>
+        <circle cx="22" cy="14" r="2.25"/>
+    </g>
+    <rect x="7" y="21" width="18" height="3" rx="1.5" fill="#DF0841"/>
+</svg>
