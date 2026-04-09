@@ -3,46 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phikra - We think, therefore You are.</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#272727">
+    <title>Phikra - We think it … until You make it.</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Tajawal:wght@400;500;700;800&display=swap"
-        rel="stylesheet"
-    >
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-    <link
-        href="https://api.fontshare.com/v2/css?f[]=panchang@400,600,700&f[]=excon@400,500&f[]=satoshi@300,400,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=Syne:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap"
         rel="stylesheet"
     >
     <style>
         :root {
             --phikra-bg: #272727;
-            --phikra-text: #E7D9D6;
-            --phikra-text-bright: #ECE0DD;
-            --phikra-red: #DF0841;
-            --phikra-red-deep: #971535;
-            --font-display: "Panchang", system-ui, sans-serif;
-            --font-body: "Excon", system-ui, -apple-system, Segoe UI, sans-serif;
-            --font-tagline: "Satoshi", system-ui, -apple-system, Segoe UI, sans-serif;
+            --phikra-text: #e8ddd8;
+            --phikra-text-bright: #e8ddd8;
+            --phikra-red: #e50d4a;
+            --phikra-burgundy: #4c1626;
+            --font-display: "Syne", system-ui, -apple-system, sans-serif;
+            --font-body: "Syne", system-ui, -apple-system, Segoe UI, sans-serif;
+            --font-tagline: "Syne", system-ui, -apple-system, Segoe UI, sans-serif;
             --neon-glow:
-                0 0 12px rgba(255, 77, 125, 0.85),
-                0 0 28px rgba(223, 8, 65, 0.55),
-                0 0 48px rgba(151, 21, 53, 0.35);
+                0 0 12px rgba(255, 130, 170, 0.85),
+                0 0 28px rgba(229, 13, 74, 0.55),
+                0 0 48px rgba(76, 22, 38, 0.45);
             --neon-text:
-                0 0 8px rgba(255, 77, 125, 0.48),
-                0 0 18px rgba(223, 8, 65, 0.3),
-                0 0 32px rgba(151, 21, 53, 0.18);
+                0 0 8px rgba(255, 130, 170, 0.48),
+                0 0 18px rgba(229, 13, 74, 0.3),
+                0 0 32px rgba(76, 22, 38, 0.22);
             --neon-text-strong:
-                0 0 9px rgba(255, 77, 125, 0.55),
-                0 0 20px rgba(223, 8, 65, 0.34),
-                0 0 36px rgba(151, 21, 53, 0.22);
-            --cyber-cyan: rgba(64, 252, 255, 0.95);
-            --cyber-magenta: rgba(255, 48, 220, 0.92);
-            --font-darija: "IBM Plex Sans Arabic", "Segoe UI", "Arabic UI Text", Tahoma, sans-serif;
-            --font-darija-display: "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+                0 0 9px rgba(255, 130, 170, 0.55),
+                0 0 20px rgba(229, 13, 74, 0.34),
+                0 0 36px rgba(76, 22, 38, 0.24);
+            --cyber-shift-a: rgba(255, 172, 190, 0.95);
+            --cyber-shift-b: rgba(229, 13, 74, 0.92);
+            --cyber-cyan: var(--cyber-shift-a);
+            --cyber-magenta: var(--cyber-shift-b);
+            --font-darija:
+                "DecoType Thuluth", "IBM Plex Sans Arabic", "Segoe UI", "Arabic UI Text", Tahoma, sans-serif;
+            --font-darija-display:
+                "DecoType Thuluth", "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+        }
+
+        @font-face {
+            font-family: "DecoType Thuluth";
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src:
+                local("DecoType Thuluth"),
+                local("Decotype Thuluth"),
+                local("DecoType Thuluth II"),
+                url("fonts/DecoType Thuluth Regular.ttf") format("truetype");
         }
 
         * {
@@ -51,6 +62,7 @@
 
         body {
             font-family: var(--font-body);
+            font-size: 1.0625rem;
             text-align: center;
             margin: 0;
             min-height: 100vh;
@@ -68,7 +80,7 @@
         .hero-title {
             margin: 0 0 1rem;
             font-family: var(--font-display);
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-size: clamp(2.15rem, 6.35vw, 3.2rem);
             font-weight: 700;
             line-height: 1.12;
             text-shadow: var(--neon-text), 0 2px 18px rgba(39, 39, 39, 0.55);
@@ -102,10 +114,10 @@
             color: var(--phikra-text-bright);
             text-shadow:
                 var(--neon-text),
-                -2px 0 18px rgba(64, 252, 255, 0.45),
-                2px 0 18px rgba(255, 48, 220, 0.4),
-                0 0 28px rgba(0, 240, 255, 0.35),
-                0 0 32px rgba(255, 0, 200, 0.22);
+                -2px 0 18px rgba(255, 172, 190, 0.45),
+                2px 0 18px rgba(229, 13, 74, 0.4),
+                0 0 28px rgba(255, 190, 205, 0.35),
+                0 0 32px rgba(120, 28, 58, 0.22);
             animation: cyber-chroma-flicker 3.6s steps(1, end) infinite;
         }
 
@@ -124,8 +136,8 @@
             z-index: -1;
             color: var(--cyber-cyan);
             text-shadow:
-                0 0 14px rgba(64, 252, 255, 0.85),
-                0 0 28px rgba(0, 240, 255, 0.5);
+                0 0 14px rgba(255, 172, 190, 0.85),
+                0 0 28px rgba(255, 190, 205, 0.5);
             clip-path: inset(0 0 0 0);
             animation: cyber-glitch-a 2.1s infinite steps(1, end);
         }
@@ -134,8 +146,8 @@
             z-index: -2;
             color: var(--cyber-magenta);
             text-shadow:
-                0 0 14px rgba(255, 48, 220, 0.8),
-                0 0 28px rgba(255, 0, 200, 0.45);
+                0 0 14px rgba(229, 13, 74, 0.8),
+                0 0 28px rgba(120, 28, 58, 0.45);
             animation: cyber-glitch-b 1.85s infinite steps(1, end);
         }
 
@@ -145,34 +157,34 @@
             100% {
                 text-shadow:
                     var(--neon-text),
-                    -2px 0 18px rgba(64, 252, 255, 0.45),
-                    2px 0 18px rgba(255, 48, 220, 0.4),
-                    0 0 28px rgba(0, 240, 255, 0.35),
-                    0 0 32px rgba(255, 0, 200, 0.22);
+                    -2px 0 18px rgba(255, 172, 190, 0.45),
+                    2px 0 18px rgba(229, 13, 74, 0.4),
+                    0 0 28px rgba(255, 190, 205, 0.35),
+                    0 0 32px rgba(120, 28, 58, 0.22);
             }
             95% {
                 text-shadow:
                     var(--neon-text),
-                    -5px 0 22px rgba(64, 252, 255, 0.65),
-                    5px 0 22px rgba(255, 48, 220, 0.55),
-                    0 0 36px rgba(0, 240, 255, 0.5),
-                    0 0 40px rgba(255, 0, 200, 0.35);
+                    -5px 0 22px rgba(255, 172, 190, 0.65),
+                    5px 0 22px rgba(229, 13, 74, 0.55),
+                    0 0 36px rgba(255, 190, 205, 0.5),
+                    0 0 40px rgba(120, 28, 58, 0.35);
             }
             96% {
                 text-shadow:
                     var(--neon-text),
-                    3px 0 20px rgba(64, 252, 255, 0.5),
-                    -4px 0 20px rgba(255, 48, 220, 0.45),
-                    0 0 30px rgba(223, 8, 65, 0.4);
+                    3px 0 20px rgba(255, 172, 190, 0.5),
+                    -4px 0 20px rgba(229, 13, 74, 0.45),
+                    0 0 30px rgba(229, 13, 74, 0.4);
             }
             97%,
             99% {
                 text-shadow:
                     var(--neon-text),
-                    -2px 0 18px rgba(64, 252, 255, 0.45),
-                    2px 0 18px rgba(255, 48, 220, 0.4),
-                    0 0 28px rgba(0, 240, 255, 0.35),
-                    0 0 32px rgba(255, 0, 200, 0.22);
+                    -2px 0 18px rgba(255, 172, 190, 0.45),
+                    2px 0 18px rgba(229, 13, 74, 0.4),
+                    0 0 28px rgba(255, 190, 205, 0.35),
+                    0 0 32px rgba(120, 28, 58, 0.22);
             }
         }
 
@@ -412,8 +424,8 @@
         .tagline {
             margin: 0;
             font-family: var(--font-tagline);
-            font-size: clamp(0.95rem, 2.4vw, 1.2rem);
-            font-weight: 300;
+            font-size: clamp(1.02rem, 2.55vw, 1.3rem);
+            font-weight: 400;
             font-style: italic;
             color: var(--phikra-text);
             opacity: 0.88;
@@ -427,65 +439,322 @@
             font-family: var(--font-tagline);
             font-style: normal;
             font-weight: 600;
-            color: #f43f68;
+            color: var(--phikra-red);
             letter-spacing: 0.06em;
             text-shadow: var(--neon-text-strong), 0 1px 12px rgba(39, 39, 39, 0.45);
         }
 
-        .darija {
-            margin-top: 1.45rem;
-            padding-top: 0.25rem;
-            font-family: var(--font-darija);
+        .lang-showcase {
             position: relative;
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0 0 0.15rem;
+            margin-left: calc(50% - 50vw);
+            box-sizing: border-box;
+            padding-left: max(1rem, env(safe-area-inset-left, 0px));
+            padding-right: max(1rem, env(safe-area-inset-right, 0px));
         }
 
-        .darija::before {
+        .lang-showcase__viewport {
+            position: relative;
+            min-height: clamp(4.75rem, 20vw, 9rem);
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .lang-showcase__panel {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.94) translateY(0.85rem);
+            transition:
+                opacity 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            z-index: 0;
+            padding: 0 0.35rem;
+        }
+
+        .lang-showcase__panel--active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        .lang-showcase__panel .tagline {
+            margin: 0 auto;
+            width: max-content;
+            max-width: none;
+            white-space: nowrap;
+            font-family: var(--font-display);
+            font-style: normal;
+            font-weight: 600;
+            font-size: clamp(1.42rem, 4.45vw, 2.12rem);
+            letter-spacing: 0.05em;
+            line-height: 1.25;
+            color: var(--phikra-text);
+            opacity: 0.92;
+            text-transform: none;
+            text-shadow: var(--neon-text), 0 1px 14px rgba(39, 39, 39, 0.48);
+        }
+
+        .lang-showcase__panel--easter-egg .tagline--easter-egg {
+            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            opacity: 0.86;
+        }
+
+        .lang-showcase__panel[dir="rtl"] .tagline {
+            font-family: var(--font-darija-display);
+            font-weight: 700;
+            font-size: clamp(1.72rem, 5.75vw, 2.65rem);
+            letter-spacing: 0.02em;
+            line-height: 1.22;
+        }
+
+        .lang-showcase__panel .tagline .tagline-you {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+            font-family: var(--font-display);
+            font-style: normal;
+            font-weight: 500;
+            letter-spacing: 0.07em;
+            color: var(--phikra-text-bright);
+            text-shadow:
+                var(--neon-text),
+                -2px 0 14px rgba(255, 172, 190, 0.35),
+                2px 0 14px rgba(229, 13, 74, 0.28),
+                0 0 22px rgba(255, 240, 235, 0.22),
+                0 1px 12px rgba(39, 39, 39, 0.45);
+            animation: cyber-chroma-flicker 3.6s steps(1, end) infinite;
+        }
+
+        .lang-showcase__panel .tagline .tagline-you::before,
+        .lang-showcase__panel .tagline .tagline-you::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            white-space: nowrap;
+            font: inherit;
+            font-style: normal;
+            letter-spacing: inherit;
+        }
+
+        .lang-showcase__panel .tagline .tagline-you::before {
+            z-index: -1;
+            color: var(--cyber-cyan);
+            text-shadow:
+                0 0 12px rgba(255, 172, 190, 0.85),
+                0 0 24px rgba(255, 190, 205, 0.5);
+            clip-path: inset(0 0 0 0);
+            animation: cyber-glitch-a 2.1s infinite steps(1, end);
+        }
+
+        .lang-showcase__panel .tagline .tagline-you::after {
+            z-index: -2;
+            color: var(--cyber-magenta);
+            text-shadow:
+                0 0 12px rgba(229, 13, 74, 0.8),
+                0 0 24px rgba(120, 28, 58, 0.45);
+            animation: cyber-glitch-b 1.85s infinite steps(1, end);
+        }
+
+        .lang-showcase__panel[dir="rtl"] .tagline .tagline-you {
+            font-family: var(--font-darija-display);
+            letter-spacing: 0.03em;
+        }
+
+        .lang-showcase__panel[lang="ja"] .tagline {
+            font-family:
+                "Hiragino Sans",
+                "Hiragino Kaku Gothic ProN",
+                "Yu Gothic UI",
+                Meiryo,
+                system-ui,
+                sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
+
+        .lang-showcase__panel[lang="ja"] .tagline .tagline-you {
+            font-family:
+                "Hiragino Sans",
+                "Hiragino Kaku Gothic ProN",
+                "Yu Gothic UI",
+                Meiryo,
+                system-ui,
+                sans-serif;
+            letter-spacing: 0.08em;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .lang-showcase::after {
             content: "";
             display: block;
             width: min(13rem, 62vw);
             max-width: 100%;
             height: 1px;
-            margin: 0 auto 1.1rem;
+            margin: 0.85rem auto 0;
             background: linear-gradient(
                 90deg,
                 transparent 0%,
-                rgba(64, 252, 255, 0.14) 18%,
-                rgba(236, 224, 221, 0.06) 40%,
-                rgba(223, 8, 65, 0.32) 50%,
-                rgba(236, 224, 221, 0.06) 60%,
-                rgba(255, 48, 220, 0.14) 82%,
+                rgba(255, 172, 190, 0.14) 18%,
+                rgba(232, 221, 216, 0.06) 40%,
+                rgba(229, 13, 74, 0.32) 50%,
+                rgba(232, 221, 216, 0.06) 60%,
+                rgba(229, 13, 74, 0.14) 82%,
                 transparent 100%
             );
             box-shadow:
-                0 0 12px rgba(223, 8, 65, 0.07),
-                0 0 20px rgba(64, 252, 255, 0.05);
+                0 0 12px rgba(229, 13, 74, 0.07),
+                0 0 20px rgba(255, 172, 190, 0.05);
         }
 
-        .darija__title {
-            margin: 0 0 0.55rem;
-            font-family: var(--font-darija-display);
-            font-size: clamp(1.45rem, 4.2vw, 2rem);
-            font-weight: 800;
-            color: var(--phikra-text-bright);
-            letter-spacing: 0.02em;
-            line-height: 1.35;
-            text-shadow: var(--neon-text), 0 1px 12px rgba(39, 39, 39, 0.45);
+        .tagline-thinking {
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+            white-space: nowrap;
         }
 
-        .darija__tagline {
+        .lang-showcase__panel .tagline .tagline-thinking {
+            margin-inline: clamp(0.08em, 0.45vw, 0.22em);
+        }
+
+        .tagline .ascii-typing {
+            --ascii-typing-period: 0.88s;
+            --ascii-typing-dots: 3;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            gap: clamp(0.03em, 0.22vw, 0.08em);
             margin: 0;
-            font-size: clamp(0.95rem, 2.6vw, 1.15rem);
-            font-weight: 300;
-            color: var(--phikra-text);
-            opacity: 0.9;
-            line-height: 1.65;
-            text-shadow: var(--neon-text), 0 1px 10px rgba(39, 39, 39, 0.4);
+            vertical-align: middle;
+            line-height: 0;
         }
 
-        .darija__tagline .tagline-you {
+        .ascii-typing__dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            animation: ascii-typing-bounce var(--ascii-typing-period, 0.88s) infinite ease-in-out both;
+            transform-origin: center bottom;
+        }
+
+        .ascii-typing__dot:nth-child(1) {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (1 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        .ascii-typing__dot:nth-child(2) {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (2 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        .ascii-typing__dot:nth-child(3) {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (3 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        .ascii-typing__glyph {
+            display: block;
+            margin: 0;
+            padding: 0;
+            min-width: clamp(3.5ch, 4.2em, 5ch);
+            min-height: calc(3 * 0.74em);
+            font-family: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+            font-size: clamp(0.28rem, 0.72em, 0.54rem);
             font-weight: 600;
-            color: #f43f68;
-            text-shadow: var(--neon-text-strong), 0 1px 10px rgba(39, 39, 39, 0.35);
+            line-height: 0.75;
+            letter-spacing: 0;
+            color: var(--phikra-red);
+            white-space: pre;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            animation: ascii-typing-glow var(--ascii-typing-period, 0.88s) infinite ease-in-out both;
+        }
+
+        .ascii-typing__dot:nth-child(1) .ascii-typing__glyph {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (1 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        .ascii-typing__dot:nth-child(2) .ascii-typing__glyph {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (2 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        .ascii-typing__dot:nth-child(3) .ascii-typing__glyph {
+            animation-delay: calc(
+                var(--ascii-typing-period, 0.88s) * (3 - var(--ascii-typing-dots, 3)) /
+                    var(--ascii-typing-dots, 3)
+            );
+        }
+
+        @keyframes ascii-typing-glow {
+            0%,
+            80%,
+            100% {
+                text-shadow:
+                    0 0 6px rgba(255, 130, 170, 0.38),
+                    0 0 14px rgba(229, 13, 74, 0.22),
+                    0 0 22px rgba(76, 22, 38, 0.12);
+            }
+            40% {
+                text-shadow:
+                    0 0 14px rgba(255, 130, 170, 0.9),
+                    0 0 26px rgba(229, 13, 74, 0.55),
+                    0 0 36px rgba(76, 22, 38, 0.35);
+            }
+        }
+
+        @keyframes ascii-typing-bounce {
+            0%,
+            80%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+            40% {
+                transform: translate3d(0, -7px, 0);
+            }
         }
 
         .content {
@@ -493,6 +762,20 @@
             z-index: 2;
             max-width: 38rem;
             padding: 0 0.5rem;
+        }
+
+        .brand-logo {
+            margin: 0 auto 1.35rem;
+            line-height: 0;
+            max-width: min(19.5rem, 93vw);
+        }
+
+        .brand-logo__img {
+            display: block;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 2px 20px rgba(229, 13, 74, 0.12))
+                drop-shadow(0 0 28px rgba(76, 22, 38, 0.18));
         }
 
         .social {
@@ -510,9 +793,9 @@
             justify-content: center;
             width: 2.5rem;
             height: 2.5rem;
-            color: rgba(236, 224, 221, 0.42);
+            color: rgba(232, 221, 216, 0.42);
             text-decoration: none;
-            border: 1px solid rgba(236, 224, 221, 0.1);
+            border: 1px solid rgba(232, 221, 216, 0.1);
             border-radius: 0.55rem;
             background: rgba(18, 18, 18, 0.35);
             box-shadow: none;
@@ -525,20 +808,20 @@
         }
 
         .social__link:hover {
-            color: rgba(236, 224, 221, 0.78);
-            border-color: rgba(223, 8, 65, 0.22);
+            color: rgba(232, 221, 216, 0.78);
+            border-color: rgba(229, 13, 74, 0.22);
             background: rgba(18, 18, 18, 0.5);
-            box-shadow: 0 0 12px rgba(223, 8, 65, 0.06);
+            box-shadow: 0 0 12px rgba(229, 13, 74, 0.06);
             transform: translateY(-1px);
         }
 
         .social__link:focus-visible {
             outline: none;
-            border-color: rgba(223, 8, 65, 0.35);
-            color: rgba(236, 224, 221, 0.9);
+            border-color: rgba(229, 13, 74, 0.35);
+            color: rgba(232, 221, 216, 0.9);
             box-shadow:
                 0 0 0 2px var(--phikra-bg),
-                0 0 14px rgba(223, 8, 65, 0.12);
+                0 0 14px rgba(229, 13, 74, 0.12);
         }
 
         .social__link svg {
@@ -549,6 +832,210 @@
 
         .social__link:hover svg {
             opacity: 1;
+        }
+
+        .ascii-snake {
+            position: fixed;
+            inset: 0;
+            z-index: 3;
+            margin: 0;
+            padding: 0;
+            border: none;
+            width: 100%;
+            min-width: 100vw;
+            min-height: 100vh;
+            min-height: 100dvh;
+            max-width: none;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        .ascii-snake__viewport {
+            position: absolute;
+            inset: 0;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            margin: 0;
+            padding: max(2px, env(safe-area-inset-top, 0px)) max(2px, env(safe-area-inset-right, 0px))
+                max(2px, env(safe-area-inset-bottom, 0px)) max(2px, env(safe-area-inset-left, 0px));
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            min-height: 0;
+            pointer-events: auto;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .ascii-snake__field {
+            display: block;
+            margin: 0;
+            padding: 0;
+            width: max-content;
+            max-width: none;
+            border: none;
+            background: transparent;
+            cursor: default;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            font-family: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+            font-size: clamp(0.42rem, min(1.05vw, 1.35vh), 0.78rem);
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: 0;
+            text-align: left;
+            white-space: pre;
+            color: var(--phikra-red);
+            text-shadow:
+                0 0 6px rgba(255, 130, 170, 0.42),
+                0 0 14px rgba(229, 13, 74, 0.32),
+                0 0 26px rgba(76, 22, 38, 0.18);
+            overflow: hidden;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .ascii-snake__field {
+                animation: ascii-snake-field-pulse 2.2s ease-in-out infinite;
+            }
+        }
+
+        @keyframes ascii-snake-field-pulse {
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .ascii-snake__score {
+            position: absolute;
+            z-index: 2;
+            bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-display);
+            font-size: clamp(0.78rem, 2.2vw, 0.95rem);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.14em;
+            color: rgba(255, 172, 190, 0.88);
+            text-shadow:
+                var(--neon-text),
+                0 0 14px rgba(229, 13, 74, 0.35);
+            pointer-events: none;
+        }
+
+        .ascii-snake__score--restart {
+            font-variant-numeric: normal;
+            letter-spacing: 0.1em;
+            font-size: clamp(0.65rem, 1.85vw, 0.88rem);
+            max-width: min(94vw, 22rem);
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .ascii-snake__score[hidden] {
+            display: none !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ascii-snake__field {
+                animation: none;
+                opacity: 1;
+            }
+        }
+
+        .ascii-snake__viewport:focus-within {
+            outline: none;
+        }
+
+        .ascii-snake__viewport:focus-within::after {
+            content: "";
+            position: absolute;
+            inset: max(2px, env(safe-area-inset-top, 0px)) max(2px, env(safe-area-inset-right, 0px))
+                max(2px, env(safe-area-inset-bottom, 0px)) max(2px, env(safe-area-inset-left, 0px));
+            border: 1px solid rgba(229, 13, 74, 0.18);
+            border-radius: 3px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ascii-snake__touch {
+            position: absolute;
+            z-index: 2;
+            bottom: max(2.85rem, calc(env(safe-area-inset-bottom, 0px) + 2.25rem));
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            grid-template-columns: repeat(3, minmax(2.25rem, 1fr));
+            gap: 0.35rem;
+            width: min(11rem, calc(100vw - 2rem));
+            max-width: 11rem;
+            margin: 0;
+            pointer-events: auto;
+        }
+
+        .ascii-snake--running .ascii-snake__touch {
+            display: grid;
+        }
+
+        .ascii-snake__touch .ascii-snake__btn:nth-child(1) {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .ascii-snake__touch .ascii-snake__btn:nth-child(2) {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .ascii-snake__touch .ascii-snake__btn:nth-child(3) {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .ascii-snake__touch .ascii-snake__btn:nth-child(4) {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .ascii-snake__btn {
+            margin: 0;
+            padding: 0.4rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            line-height: 1;
+            color: rgba(232, 221, 216, 0.5);
+            background: rgba(18, 18, 18, 0.28);
+            border: 1px solid rgba(232, 221, 216, 0.1);
+            border-radius: 0.4rem;
+            cursor: pointer;
+            touch-action: manipulation;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .ascii-snake__btn:hover {
+            color: rgba(232, 221, 216, 0.88);
+            border-color: rgba(229, 13, 74, 0.2);
+            background: rgba(18, 18, 18, 0.38);
+        }
+
+        @media (min-width: 480px) {
+            .ascii-snake__touch {
+                display: none !important;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -574,19 +1061,14 @@
 
         .quote-marquee--top {
             top: 0;
-            border-bottom: 1px solid rgba(223, 8, 65, 0.08);
-        }
-
-        .quote-marquee--bottom {
-            bottom: 0;
-            border-top: 1px solid rgba(223, 8, 65, 0.08);
+            border-bottom: 1px solid rgba(229, 13, 74, 0.08);
         }
 
         .quote-marquee__track {
             display: flex;
             width: max-content;
             font-family: var(--font-tagline);
-            font-size: 0.68rem;
+            font-size: 0.74rem;
             font-weight: 400;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -597,10 +1079,6 @@
             animation: marquee-left 72s linear infinite;
         }
 
-        .quote-marquee--bottom .quote-marquee__track {
-            animation-name: marquee-right;
-        }
-
         .quote-marquee__group {
             display: flex;
             flex-shrink: 0;
@@ -609,7 +1087,7 @@
 
         .quote-marquee__sep {
             padding: 0 1.75rem;
-            color: rgba(236, 224, 221, 0.35);
+            color: rgba(232, 221, 216, 0.35);
             font-weight: 300;
         }
 
@@ -618,10 +1096,10 @@
             font-style: italic;
             font-weight: 500;
             letter-spacing: 0.09em;
-            color: rgba(244, 232, 228, 0.78);
+            color: rgba(232, 221, 216, 0.78);
             text-shadow:
-                0 0 12px rgba(223, 8, 65, 0.14),
-                0 0 22px rgba(223, 8, 65, 0.06);
+                0 0 12px rgba(229, 13, 74, 0.14),
+                0 0 22px rgba(229, 13, 74, 0.06);
         }
 
         .quote-marquee__team-inner::before {
@@ -633,8 +1111,8 @@
 
         .quote-marquee__team--wait {
             font-weight: 400;
-            color: rgba(236, 224, 221, 0.52);
-            text-shadow: 0 0 10px rgba(223, 8, 65, 0.07);
+            color: rgba(232, 221, 216, 0.52);
+            text-shadow: 0 0 10px rgba(229, 13, 74, 0.07);
         }
 
         .quote-marquee__team--wait .quote-marquee__team-inner::before {
@@ -648,15 +1126,6 @@
             }
             to {
                 transform: translateX(-50%);
-            }
-        }
-
-        @keyframes marquee-right {
-            from {
-                transform: translateX(-50%);
-            }
-            to {
-                transform: translateX(0);
             }
         }
 
@@ -696,7 +1165,7 @@
         }
 
         ::selection {
-            background: var(--phikra-red-deep);
+            background: var(--phikra-burgundy);
             color: var(--phikra-text-bright);
         }
 
@@ -707,12 +1176,12 @@
             height: 100%;
             overflow: hidden;
             font-family: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
-            font-size: clamp(0.78rem, 2.35vw, 1.08rem);
+            font-size: clamp(0.84rem, 2.5vw, 1.14rem);
             font-weight: 600;
             line-height: 1;
             letter-spacing: 0.02em;
-            color: #f43f68;
-            text-shadow: var(--neon-glow);
+            color: rgba(200, 195, 192, 0.28);
+            text-shadow: 0 0 10px rgba(200, 195, 192, 0.1);
             white-space: pre;
             text-align: left;
         }
@@ -727,7 +1196,7 @@
             }
 
             .ascii-stage {
-                text-shadow: 0 0 8px rgba(223, 8, 65, 0.4);
+                text-shadow: 0 0 6px rgba(200, 195, 192, 0.12);
             }
 
             .quote-marquee__track {
@@ -754,6 +1223,43 @@
             .cyber-name::after {
                 animation: none;
                 opacity: 0;
+            }
+
+            .lang-showcase__panel .tagline .tagline-you {
+                animation: none;
+            }
+
+            .lang-showcase__panel .tagline .tagline-you::before,
+            .lang-showcase__panel .tagline .tagline-you::after {
+                animation: none;
+                opacity: 0;
+            }
+
+            .lang-showcase__viewport {
+                min-height: 0;
+            }
+
+            .lang-showcase__panel {
+                position: relative;
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .lang-showcase__panel:not(:first-of-type) {
+                display: none !important;
+            }
+
+            .ascii-typing__dot {
+                animation: none;
+            }
+
+            .ascii-typing__glyph {
+                animation: none;
+                text-shadow:
+                    0 0 6px rgba(255, 130, 170, 0.38),
+                    0 0 14px rgba(229, 13, 74, 0.22),
+                    0 0 22px rgba(76, 22, 38, 0.12);
             }
         }
     </style>
@@ -808,54 +1314,188 @@
             </div>
         </div>
 
-        <div class="quote-marquee quote-marquee--bottom" aria-hidden="true">
-            <div class="quote-marquee__track">
-                <span class="quote-marquee__group">
-                    <span>Cogito, ergo sum. — Descartes</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">F. Kho. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Knowledge speaks, wisdom listens. — Hendrix</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">R. Mti — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Well done is better than well said. — Franklin</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">H. Lah — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Not all those who wander are lost. — Tolkien</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Loubna — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Simplicity is the ultimate sophistication. — da Vinci</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Alae — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>What we think, we become. — Buddha</span><span class="quote-marquee__sep">·</span>
-                    <span>Design is intelligence made visible. — Rand</span><span class="quote-marquee__sep">·</span>
-                    <span>Make it simple, but significant. — Armani</span><span class="quote-marquee__sep">·</span>
-                </span>
-                <span class="quote-marquee__group">
-                    <span>Cogito, ergo sum. — Descartes</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">F. Kho. — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Knowledge speaks, wisdom listens. — Hendrix</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">R. Mti — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Well done is better than well said. — Franklin</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">H. Lah — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Not all those who wander are lost. — Tolkien</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Loubna — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>Simplicity is the ultimate sophistication. — da Vinci</span><span class="quote-marquee__sep">·</span>
-                    <span class="quote-marquee__team quote-marquee__team--wait"><span class="quote-marquee__team-inner">Alae — mazal kantsnaw l quote dialk</span></span><span class="quote-marquee__sep">·</span>
-                    <span>What we think, we become. — Buddha</span><span class="quote-marquee__sep">·</span>
-                    <span>Design is intelligence made visible. — Rand</span><span class="quote-marquee__sep">·</span>
-                    <span>Make it simple, but significant. — Armani</span><span class="quote-marquee__sep">·</span>
-                </span>
-            </div>
-        </div>
-
         <main class="content">
-            <h1 class="hero-title">
-                <span class="hero-title__lead">This is</span>
-                <span class="cyber-name-wrap"><span class="cyber-name" data-text="Phikra">Phikra</span></span>
-            </h1>
-            <p class="tagline">We think, therefore <span class="tagline-you">You</span> are.</p>
-
-            <section class="darija" lang="ary" dir="rtl" translate="no">
-                <p class="darija__title">هادي هي فكرة</p>
-                <p class="darija__tagline" lang="ary">
-                    كنفكرو، إذن <span class="tagline-you">نتوما</span> موجودين.
-                </p>
-            </section>
+            <div class="brand-logo">
+                <img
+                    class="brand-logo__img"
+                    src="logo.svg"
+                    width="202"
+                    height="106"
+                    alt="Phikra"
+                    decoding="async"
+                />
+            </div>
+            <h1 class="visually-hidden">Phikra</h1>
+            <div
+                class="lang-showcase"
+                role="region"
+                aria-label="Phikra tagline in many languages"
+            >
+                <div class="lang-showcase__viewport">
+                    <section
+                        class="lang-showcase__panel lang-showcase__panel--active"
+                        lang="en"
+                        aria-hidden="false"
+                    >
+                        <p class="tagline">
+                            We think it <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            until <span class="tagline-you" data-text="You">You</span> make it.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="fr" aria-hidden="true">
+                        <p class="tagline">
+                            Nous y pensons <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            jusqu'à ce que <span class="tagline-you" data-text="Vous">Vous</span> le concrétisiez.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="es" aria-hidden="true">
+                        <p class="tagline">
+                            Lo pensamos <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            hasta que <span class="tagline-you" data-text="Tú">Tú</span> lo hagas.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="de" aria-hidden="true">
+                        <p class="tagline">
+                            Wir denken daran <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            bis <span class="tagline-you" data-text="Ihr">Ihr</span> es macht.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="it" aria-hidden="true">
+                        <p class="tagline">
+                            Ci pensiamo <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            finché <span class="tagline-you" data-text="Tu">Tu</span> non lo concretizzi.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="pt" aria-hidden="true">
+                        <p class="tagline">
+                            Pensamos nisso <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            até <span class="tagline-you" data-text="Vocês">Vocês</span> o concretizarem.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="nl" aria-hidden="true">
+                        <p class="tagline">
+                            We denken erover na <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            tot <span class="tagline-you" data-text="Jullie">Jullie</span> het waarmaken.
+                        </p>
+                    </section>
+                    <section class="lang-showcase__panel" lang="ja" aria-hidden="true">
+                        <p class="tagline">
+                            それを考えています <span class="tagline-thinking"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            <span class="tagline-you" data-text="あなた">あなた</span>が形にするまで。
+                        </p>
+                    </section>
+                    <section
+                        class="lang-showcase__panel lang-showcase__panel--easter-egg"
+                        lang="es"
+                        translate="no"
+                        aria-hidden="true"
+                    >
+                        <p class="tagline tagline--easter-egg">la ballena serena la misma canción</p>
+                    </section>
+                    <section
+                        class="lang-showcase__panel"
+                        lang="ary"
+                        dir="rtl"
+                        translate="no"
+                        aria-hidden="true"
+                    >
+                        <p class="tagline">
+                            كنفكرو فيه <span class="tagline-thinking" dir="ltr"
+                                ><span class="visually-hidden"> … </span
+                                ><span class="ascii-typing" aria-hidden="true"
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                    ><span class="ascii-typing__dot"
+                                        ><span class="ascii-typing__glyph" aria-hidden="true"></span></span
+                                ></span
+                            ></span>
+                            حتى <span class="tagline-you" data-text="نتوما">نتوما</span> تصوّبوه.
+                        </p>
+                    </section>
+                </div>
+            </div>
 
             <nav class="social" aria-label="Social media links">
                 <a
@@ -914,6 +1554,33 @@
             </nav>
         </main>
 
+        <section class="ascii-snake" id="ascii-snake-root" aria-label="Snake game">
+            <div
+                class="ascii-snake__viewport"
+                id="ascii-snake-viewport"
+                tabindex="0"
+                role="application"
+                aria-label="Press a key or tap to start. Then steer with arrows or W A S D. R restarts."
+            >
+                <pre class="ascii-snake__field" id="ascii-snake-field" aria-hidden="true"></pre>
+            </div>
+            <div class="ascii-snake__touch" aria-hidden="true">
+                <button type="button" class="ascii-snake__btn" data-snake-dir="0,-1" aria-hidden="true">
+                    ↑
+                </button>
+                <button type="button" class="ascii-snake__btn" data-snake-dir="-1,0" aria-hidden="true">
+                    ←
+                </button>
+                <button type="button" class="ascii-snake__btn" data-snake-dir="0,1" aria-hidden="true">
+                    ↓
+                </button>
+                <button type="button" class="ascii-snake__btn" data-snake-dir="1,0" aria-hidden="true">
+                    →
+                </button>
+            </div>
+            <p class="ascii-snake__score" id="snake-score" hidden aria-live="polite">0</p>
+        </section>
+
         <script>
             (function () {
                 var wrap = document.querySelector(".ascii-bg");
@@ -943,7 +1610,7 @@
                         streams.push({
                             col: col,
                             y: Math.random() * -rows * 1.25 - (i % 9) * 2.5,
-                            speed: 0.11 + Math.random() * 0.2,
+                            speed: 0.052 + Math.random() * 0.1,
                             len: 10 + ((Math.random() * 14) | 0)
                         });
                     }
@@ -1007,7 +1674,7 @@
                         if (s.y - s.len > rows + 4) {
                             s.y = -2 - Math.random() * (rows * 0.55);
                             s.len = 10 + ((Math.random() * 14) | 0);
-                            s.speed = 0.095 + Math.random() * 0.22;
+                            s.speed = 0.048 + Math.random() * 0.1;
                         }
                         head = s.y | 0;
                         for (k = 0; k < s.len; k++) {
@@ -1042,6 +1709,438 @@
                 }
                 layout();
                 requestAnimationFrame(tick);
+            })();
+        </script>
+        <script>
+            (function () {
+                var panels = document.querySelectorAll(".lang-showcase__panel");
+                if (!panels.length) return;
+
+                var n = panels.length;
+                var intervalMs = 6800;
+                var idx = 0;
+
+                function show(i) {
+                    var k;
+                    for (k = 0; k < n; k++) {
+                        var on = k === i;
+                        panels[k].classList.toggle("lang-showcase__panel--active", on);
+                        panels[k].setAttribute("aria-hidden", on ? "false" : "true");
+                    }
+                }
+
+                show(0);
+
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    return;
+                }
+
+                setInterval(function () {
+                    idx = (idx + 1) % n;
+                    show(idx);
+                }, intervalMs);
+            })();
+        </script>
+        <script>
+            (function () {
+                var pres = document.querySelectorAll(".ascii-typing__glyph");
+                if (!pres.length) return;
+
+                var GRID_W = 5;
+                var GRID_H = 3;
+                var cx = (GRID_W - 1) / 2;
+                var cy = (GRID_H - 1) / 2;
+                var CELL_ASPECT = 0.58;
+                var RADIUS_SQ = 2;
+                var pattern = [];
+                var gy, gx, dx, dy, wx;
+                for (gy = 0; gy < GRID_H; gy++) {
+                    var row = "";
+                    for (gx = 0; gx < GRID_W; gx++) {
+                        dx = gx - cx;
+                        dy = gy - cy;
+                        wx = dx * CELL_ASPECT;
+                        row += wx * wx + dy * dy <= RADIUS_SQ ? "*" : " ";
+                    }
+                    pattern.push(row);
+                }
+                var chars =
+                    ".*@o+#$%&01/\\|<>?!~^:=;,-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+                function renderGlyph(pre) {
+                    var lines = pattern.map(function (row) {
+                        return row
+                            .split("")
+                            .map(function (cell) {
+                                if (cell !== "*") return " ";
+                                return chars[(Math.random() * chars.length) | 0];
+                            })
+                            .join("");
+                    });
+                    pre.textContent = lines.join("\n");
+                }
+
+                function tickAll() {
+                    for (var i = 0; i < pres.length; i++) {
+                        renderGlyph(pres[i]);
+                    }
+                }
+
+                tickAll();
+
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                    return;
+                }
+
+                setInterval(tickAll, 58);
+            })();
+        </script>
+        <script>
+            (function () {
+                var field = document.getElementById("ascii-snake-field");
+                var viewport = document.getElementById("ascii-snake-viewport");
+                var scoreEl = document.getElementById("snake-score");
+                var root = document.getElementById("ascii-snake-root");
+                if (!field || !viewport || !scoreEl || !root) return;
+
+                var W = 20;
+                var H = 11;
+                var tickMs = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 46;
+                var acc = 0;
+                var timePrev = 0;
+                var maxStepsPerFrame = 4;
+                var running = false;
+                var renderNeeded = false;
+                var gridBuf;
+
+                var snake;
+                var dir;
+                var nextDir;
+                var food;
+                var score;
+                var gameOver;
+                var gameOverByWall = false;
+
+                function measureCharWidth() {
+                    var style = window.getComputedStyle(field);
+                    var probe = document.createElement("span");
+                    probe.style.cssText =
+                        "position:absolute;visibility:hidden;white-space:pre;font:" +
+                        style.font +
+                        ";letter-spacing:" +
+                        style.letterSpacing;
+                    probe.textContent = "@";
+                    document.body.appendChild(probe);
+                    var w = probe.offsetWidth || parseFloat(style.fontSize) * 0.62;
+                    document.body.removeChild(probe);
+                    return w;
+                }
+
+                function playAreaBox() {
+                    var r = root.getBoundingClientRect();
+                    return {
+                        w: Math.max(0, r.width),
+                        h: Math.max(0, r.height)
+                    };
+                }
+
+                function resize() {
+                    var box = playAreaBox();
+                    var availW = box.w;
+                    var availH = box.h;
+                    if (availW < 40 || availH < 32) return;
+
+                    var fs = parseFloat(window.getComputedStyle(field).fontSize) || 11;
+                    var lineH = fs;
+                    var cw = measureCharWidth();
+                    if (cw < 2) cw = fs * 0.58;
+                    var ow = W;
+                    var oh = H;
+                    var nW = Math.max(8, (availW / cw) | 0);
+                    var nH = Math.max(6, (availH / lineH) | 0);
+                    if (nW > 200) nW = 200;
+                    if (nH > 100) nH = 100;
+
+                    W = nW;
+                    H = nH;
+
+                    if (running && snake && (ow !== W || oh !== H)) {
+                        reset();
+                    }
+                }
+
+                function renderField() {
+                    if (!running || !snake || !snake.length || !food) {
+                        field.textContent = "";
+                        return;
+                    }
+                    var size = W * H;
+                    if (!gridBuf || gridBuf.length !== size) {
+                        gridBuf = new Array(size);
+                    }
+                    var i;
+                    var k;
+                    var gx;
+                    var gy;
+                    for (i = 0; i < size; i++) {
+                        gridBuf[i] = " ";
+                    }
+                    if (food) {
+                        gridBuf[food.y * W + food.x] = "*";
+                    }
+                    for (k = snake.length - 1; k >= 0; k--) {
+                        gx = snake[k].x;
+                        gy = snake[k].y;
+                        gridBuf[gy * W + gx] = k === 0 ? "@" : "o";
+                    }
+                    var lines = [];
+                    var rowStart;
+                    for (gy = 0; gy < H; gy++) {
+                        rowStart = gy * W;
+                        lines.push(gridBuf.slice(rowStart, rowStart + W).join(""));
+                    }
+                    var text = lines.join("\n");
+                    if (gameOver && !gameOverByWall) {
+                        text += "\n\nGAME OVER — R to restart";
+                    }
+                    field.textContent = text;
+                }
+
+                function setScoreDisplay() {
+                    scoreEl.textContent = String(score);
+                    scoreEl.classList.remove("ascii-snake__score--restart");
+                }
+
+                function placeFood() {
+                    var tries = 0;
+                    var fx;
+                    var fy;
+                    var ok;
+                    var si;
+                    while (tries < 500) {
+                        fx = (Math.random() * W) | 0;
+                        fy = (Math.random() * H) | 0;
+                        ok = true;
+                        for (si = 0; si < snake.length; si++) {
+                            if (snake[si].x === fx && snake[si].y === fy) {
+                                ok = false;
+                                break;
+                            }
+                        }
+                        if (ok) {
+                            food = { x: fx, y: fy };
+                            return;
+                        }
+                        tries++;
+                    }
+                    food = { x: 0, y: 0 };
+                }
+
+                function step() {
+                    if (gameOver) return;
+                    if (nextDir.x !== -dir.x || nextDir.y !== -dir.y) {
+                        dir.x = nextDir.x;
+                        dir.y = nextDir.y;
+                    }
+                    var nx = snake[0].x + dir.x;
+                    var ny = snake[0].y + dir.y;
+                    var i;
+                    if (nx < 0 || nx >= W || ny < 0 || ny >= H) {
+                        gameOver = true;
+                        gameOverByWall = true;
+                        scoreEl.textContent = "Press R to restart";
+                        scoreEl.classList.add("ascii-snake__score--restart");
+                        return;
+                    }
+                    var ate = nx === food.x && ny === food.y;
+                    snake.unshift({ x: nx, y: ny });
+                    if (!ate) {
+                        snake.pop();
+                    } else {
+                        score += 1;
+                        setScoreDisplay();
+                        placeFood();
+                    }
+                    for (i = 1; i < snake.length; i++) {
+                        if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+                            if (i === snake.length - 1) {
+                                continue;
+                            }
+                            gameOver = true;
+                            gameOverByWall = false;
+                            return;
+                        }
+                    }
+                }
+
+                function reset() {
+                    if (!running) return;
+                    var edge = (Math.random() * 4) | 0;
+                    var t;
+                    if (edge === 0) {
+                        t = (Math.random() * W) | 0;
+                        dir = { x: 0, y: 1 };
+                        snake = [
+                            { x: t, y: 0 },
+                            { x: t, y: 1 },
+                            { x: t, y: 2 }
+                        ];
+                    } else if (edge === 1) {
+                        t = (Math.random() * W) | 0;
+                        dir = { x: 0, y: -1 };
+                        snake = [
+                            { x: t, y: H - 1 },
+                            { x: t, y: H - 2 },
+                            { x: t, y: H - 3 }
+                        ];
+                    } else if (edge === 2) {
+                        t = (Math.random() * H) | 0;
+                        dir = { x: 1, y: 0 };
+                        snake = [
+                            { x: 0, y: t },
+                            { x: 1, y: t },
+                            { x: 2, y: t }
+                        ];
+                    } else {
+                        t = (Math.random() * H) | 0;
+                        dir = { x: -1, y: 0 };
+                        snake = [
+                            { x: W - 1, y: t },
+                            { x: W - 2, y: t },
+                            { x: W - 3, y: t }
+                        ];
+                    }
+                    nextDir = { x: dir.x, y: dir.y };
+                    score = 0;
+                    gameOver = false;
+                    gameOverByWall = false;
+                    acc = 0;
+                    setScoreDisplay();
+                    placeFood();
+                    renderNeeded = true;
+                }
+
+                function tryStart() {
+                    if (running) return;
+                    running = true;
+                    acc = 0;
+                    root.classList.add("ascii-snake--running");
+                    scoreEl.removeAttribute("hidden");
+                    resize();
+                    reset();
+                }
+
+                function onKey(e) {
+                    var el = e.target;
+                    if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable)) {
+                        return;
+                    }
+                    var k = e.key;
+                    if (!running) {
+                        if (k === "Tab" || k === "Escape") return;
+                        tryStart();
+                        if (k === "r" || k === "R") {
+                            e.preventDefault();
+                            return;
+                        }
+                    }
+                    if (k === "ArrowUp" || k === "w" || k === "W") {
+                        nextDir = { x: 0, y: -1 };
+                        e.preventDefault();
+                    } else if (k === "ArrowDown" || k === "s" || k === "S") {
+                        nextDir = { x: 0, y: 1 };
+                        e.preventDefault();
+                    } else if (k === "ArrowLeft" || k === "a" || k === "A") {
+                        nextDir = { x: -1, y: 0 };
+                        e.preventDefault();
+                    } else if (k === "ArrowRight" || k === "d" || k === "D") {
+                        nextDir = { x: 1, y: 0 };
+                        e.preventDefault();
+                    } else if (k === "r" || k === "R") {
+                        if (running) {
+                            resize();
+                            reset();
+                        }
+                        e.preventDefault();
+                    }
+                }
+
+                window.addEventListener("keydown", onKey, false);
+                viewport.addEventListener("click", function () {
+                    tryStart();
+                    viewport.focus();
+                });
+
+                root.addEventListener(
+                    "touchstart",
+                    function () {
+                        tryStart();
+                    },
+                    { passive: true }
+                );
+
+                (function bindTouch() {
+                    var btns = root.querySelectorAll("[data-snake-dir]");
+                    var bi;
+                    for (bi = 0; bi < btns.length; bi++) {
+                        btns[bi].addEventListener("click", function (ev) {
+                            tryStart();
+                            var t = ev.currentTarget.getAttribute("data-snake-dir").split(",");
+                            nextDir = { x: parseInt(t[0], 10), y: parseInt(t[1], 10) };
+                            viewport.focus();
+                        });
+                    }
+                })();
+
+                window.addEventListener("resize", resize);
+                if (window.visualViewport) {
+                    window.visualViewport.addEventListener("resize", resize);
+                }
+                if (typeof ResizeObserver !== "undefined") {
+                    new ResizeObserver(function () {
+                        resize();
+                    }).observe(root);
+                }
+
+                function gameLoop(now) {
+                    var dt;
+                    var steps;
+                    if (timePrev === 0) {
+                        timePrev = now > 0 ? now : 1;
+                        if (renderNeeded) {
+                            renderField();
+                            renderNeeded = false;
+                        }
+                        requestAnimationFrame(gameLoop);
+                        return;
+                    }
+                    dt = now - timePrev;
+                    timePrev = now;
+                    if (dt > 250) dt = 250;
+                    if (dt < 0) dt = 0;
+                    if (running) {
+                        acc += dt;
+                    }
+                    steps = 0;
+                    while (running && !gameOver && acc >= tickMs && steps < maxStepsPerFrame) {
+                        acc -= tickMs;
+                        steps += 1;
+                        step();
+                    }
+                    if (steps > 0 || renderNeeded) {
+                        renderField();
+                        renderNeeded = false;
+                    }
+                    requestAnimationFrame(gameLoop);
+                }
+
+                field.addEventListener("click", function () {
+                    tryStart();
+                    viewport.focus();
+                });
+
+                resize();
+                requestAnimationFrame(gameLoop);
             })();
         </script>
 </body>
