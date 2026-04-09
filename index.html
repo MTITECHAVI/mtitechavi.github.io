@@ -453,6 +453,7 @@
             box-sizing: border-box;
             padding-left: max(1rem, env(safe-area-inset-left, 0px));
             padding-right: max(1rem, env(safe-area-inset-right, 0px));
+            pointer-events: auto;
         }
 
         .lang-showcase__viewport {
@@ -759,15 +760,17 @@
 
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 4;
             max-width: 38rem;
             padding: 0 0.5rem;
+            pointer-events: none;
         }
 
         .brand-logo {
             margin: 0 auto 1.35rem;
             line-height: 0;
             max-width: min(19.5rem, 93vw);
+            pointer-events: auto;
         }
 
         .brand-logo__img {
@@ -785,6 +788,7 @@
             align-items: center;
             gap: 0.55rem;
             margin-top: 1.65rem;
+            pointer-events: auto;
         }
 
         .social__link {
@@ -865,7 +869,7 @@
             border-radius: 0;
             box-shadow: none;
             min-height: 0;
-            pointer-events: auto;
+            pointer-events: none;
             touch-action: none;
             display: flex;
             align-items: center;
@@ -898,6 +902,7 @@
                 0 0 14px rgba(229, 13, 74, 0.32),
                 0 0 26px rgba(76, 22, 38, 0.18);
             overflow: hidden;
+            pointer-events: auto;
         }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -1803,6 +1808,28 @@
                 var root = document.getElementById("ascii-snake-root");
                 if (!field || !viewport || !scoreEl || !root) return;
 
+                var HIGH_STORAGE_KEY = "phikra-snake-highscore";
+                var highScore = 0;
+
+                function loadHighScore() {
+                    try {
+                        var raw = localStorage.getItem(HIGH_STORAGE_KEY);
+                        if (raw === null || raw === "") return;
+                        var n = parseInt(raw, 10);
+                        if (!isNaN(n) && n >= 0 && n < 1e6) {
+                            highScore = n;
+                        }
+                    } catch (err) {}
+                }
+
+                function saveHighScore() {
+                    try {
+                        localStorage.setItem(HIGH_STORAGE_KEY, String(highScore));
+                    } catch (err) {}
+                }
+
+                loadHighScore();
+
                 var W = 20;
                 var H = 11;
                 var tickMs = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 46;
@@ -1907,7 +1934,7 @@
                 }
 
                 function setScoreDisplay() {
-                    scoreEl.textContent = String(score);
+                    scoreEl.textContent = score + " · best " + highScore;
                     scoreEl.classList.remove("ascii-snake__score--restart");
                 }
 
@@ -1948,7 +1975,7 @@
                     if (nx < 0 || nx >= W || ny < 0 || ny >= H) {
                         gameOver = true;
                         gameOverByWall = true;
-                        scoreEl.textContent = "Press R to restart";
+                        scoreEl.textContent = "Press R to restart · best " + highScore;
                         scoreEl.classList.add("ascii-snake__score--restart");
                         return;
                     }
@@ -1958,6 +1985,10 @@
                         snake.pop();
                     } else {
                         score += 1;
+                        if (score > highScore) {
+                            highScore = score;
+                            saveHighScore();
+                        }
                         setScoreDisplay();
                         placeFood();
                     }
@@ -2066,10 +2097,6 @@
                 }
 
                 window.addEventListener("keydown", onKey, false);
-                viewport.addEventListener("click", function () {
-                    tryStart();
-                    viewport.focus();
-                });
 
                 root.addEventListener(
                     "touchstart",
