@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#272727">
     <title>Phikra - We think it … until You make it.</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
@@ -464,7 +464,12 @@
             overflow-x: auto;
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .lang-showcase__viewport::-webkit-scrollbar {
+            display: none;
         }
 
         .lang-showcase__panel {
@@ -767,9 +772,10 @@
         }
 
         .brand-logo {
-            margin: 0 auto 1.35rem;
+            margin: 0 auto clamp(0.6rem, 2.5vw, 1.35rem);
             line-height: 0;
-            max-width: min(19.5rem, 93vw);
+            width: min(100%, clamp(10.5rem, 42vw + 3.25rem, 21.5rem));
+            max-width: min(21.5rem, calc(100vw - 1.25rem));
             pointer-events: auto;
         }
 
@@ -777,6 +783,7 @@
             display: block;
             width: 100%;
             height: auto;
+            aspect-ratio: 202 / 106;
             filter: drop-shadow(0 2px 20px rgba(229, 13, 74, 0.12))
                 drop-shadow(0 0 28px rgba(76, 22, 38, 0.18));
         }
@@ -852,6 +859,8 @@
             max-width: none;
             box-sizing: border-box;
             pointer-events: none;
+            touch-action: manipulation;
+            overscroll-behavior: contain;
         }
 
         .ascii-snake__viewport {
@@ -869,7 +878,7 @@
             border-radius: 0;
             box-shadow: none;
             min-height: 0;
-            pointer-events: none;
+            pointer-events: auto;
             touch-action: none;
             display: flex;
             align-items: center;
@@ -1003,8 +1012,13 @@
             }
         }
 
-        .ascii-snake__viewport:focus-within {
+        .ascii-snake__viewport:focus {
             outline: none;
+        }
+
+        .ascii-snake__viewport:focus-visible {
+            outline: 2px solid rgba(229, 13, 74, 0.45);
+            outline-offset: 3px;
         }
 
         .ascii-snake__viewport:focus-within::after {
@@ -1079,9 +1093,24 @@
             background: rgba(18, 18, 18, 0.38);
         }
 
-        @media (min-width: 480px) {
+        /* Hide direction pad only for fine pointers (mouse / trackpad). Keep on phones & tablets. */
+        @media (min-width: 480px) and (pointer: fine) {
             .ascii-snake__touch {
                 display: none !important;
+            }
+        }
+
+        @media (pointer: coarse) {
+            .ascii-snake__touch {
+                grid-template-columns: repeat(3, minmax(2.75rem, 1fr));
+                width: min(12.5rem, calc(100vw - 2rem));
+            }
+
+            .ascii-snake__btn {
+                min-width: 2.75rem;
+                min-height: 2.75rem;
+                padding: 0.55rem;
+                font-size: 1rem;
             }
         }
 
@@ -1601,31 +1630,39 @@
             </nav>
         </main>
 
-        <section class="ascii-snake" id="ascii-snake-root" aria-label="Snake game">
+        <section class="ascii-snake" id="ascii-snake-root" aria-label="Snake minigame" role="region">
             <div
                 class="ascii-snake__viewport"
                 id="ascii-snake-viewport"
                 tabindex="0"
                 role="application"
-                aria-label="Press a key or tap to start. Steer with arrows or W A S D. Edges wrap. R restarts."
+                aria-roledescription="game"
+                aria-label="Snake. Tap the playfield or press a key to start. On touch, use the on-screen direction buttons below when visible. With a keyboard, use arrow keys or W A S D. Edges wrap around. Press R to restart after game over."
             >
                 <pre class="ascii-snake__field" id="ascii-snake-field" aria-hidden="true"></pre>
             </div>
-            <div class="ascii-snake__touch" aria-hidden="true">
-                <button type="button" class="ascii-snake__btn" data-snake-dir="0,-1" aria-hidden="true">
+            <div
+                class="ascii-snake__touch"
+                role="group"
+                aria-label="Snake direction controls for touch"
+            >
+                <button type="button" class="ascii-snake__btn" data-snake-dir="0,-1" aria-label="Turn upward">
                     ↑
                 </button>
-                <button type="button" class="ascii-snake__btn" data-snake-dir="-1,0" aria-hidden="true">
+                <button type="button" class="ascii-snake__btn" data-snake-dir="-1,0" aria-label="Turn left">
                     ←
                 </button>
-                <button type="button" class="ascii-snake__btn" data-snake-dir="0,1" aria-hidden="true">
+                <button type="button" class="ascii-snake__btn" data-snake-dir="0,1" aria-label="Turn downward">
                     ↓
                 </button>
-                <button type="button" class="ascii-snake__btn" data-snake-dir="1,0" aria-hidden="true">
+                <button type="button" class="ascii-snake__btn" data-snake-dir="1,0" aria-label="Turn right">
                     →
                 </button>
             </div>
-            <p class="ascii-snake__score" id="snake-score" hidden aria-live="polite">0</p>
+            <p class="ascii-snake__score" id="snake-score" role="status" hidden aria-live="polite" aria-atomic="true">
+                0
+            </p>
+            <p id="snake-a11y-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
         </section>
 
         <script>
@@ -1849,7 +1886,14 @@
                 var scoreEl = document.getElementById("snake-score");
                 var root = document.getElementById("ascii-snake-root");
                 var contentZoneEl = document.querySelector(".content");
+                var a11yStatusEl = document.getElementById("snake-a11y-status");
                 if (!field || !viewport || !scoreEl || !root) return;
+
+                function announceSnake(msg) {
+                    if (a11yStatusEl) {
+                        a11yStatusEl.textContent = msg || "";
+                    }
+                }
 
                 var HIGH_STORAGE_KEY = "phikra-snake-highscore";
                 var highScore = 0;
@@ -2093,6 +2137,7 @@
                                 continue;
                             }
                             gameOver = true;
+                            announceSnake("Game over. Your score was " + score + ". Press R to restart.");
                             return;
                         }
                     }
@@ -2139,6 +2184,7 @@
                     score = 0;
                     gameOver = false;
                     acc = 0;
+                    announceSnake("");
                     setScoreDisplay();
                     placeFood();
                     renderNeeded = true;
@@ -2254,7 +2300,7 @@
                     requestAnimationFrame(gameLoop);
                 }
 
-                field.addEventListener("click", function () {
+                viewport.addEventListener("click", function () {
                     tryStart();
                     viewport.focus();
                 });
