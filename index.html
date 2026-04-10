@@ -1968,10 +1968,28 @@
                 }
 
                 function playAreaBox() {
-                    var r = root.getBoundingClientRect();
+                    if (!viewport) {
+                        return { w: 0, h: 0 };
+                    }
+                    var w = viewport.clientWidth;
+                    var h = viewport.clientHeight;
+                    if (w < 12 || h < 12) {
+                        var r = viewport.getBoundingClientRect();
+                        w = r.width;
+                        h = r.height;
+                    }
+                    if (mqMobileGrid.matches && window.visualViewport) {
+                        var vv = window.visualViewport;
+                        if (vv.width > 0) {
+                            w = Math.min(w, vv.width);
+                        }
+                        if (vv.height > 0) {
+                            h = Math.min(h, vv.height);
+                        }
+                    }
                     return {
-                        w: Math.max(0, r.width),
-                        h: Math.max(0, r.height)
+                        w: Math.max(0, w),
+                        h: Math.max(0, h)
                     };
                 }
 
@@ -2045,10 +2063,8 @@
                     var oh = H;
                     var nW = Math.max(8, (availW / cw) | 0);
                     var nH = Math.max(6, (availH / lineH) | 0);
-                    var capW = mqMobileGrid.matches ? 88 : 200;
-                    var capH = mqMobileGrid.matches ? 52 : 100;
-                    if (nW > capW) nW = capW;
-                    if (nH > capH) nH = capH;
+                    if (nW > 200) nW = 200;
+                    if (nH > 100) nH = 100;
 
                     W = nW;
                     H = nH;
