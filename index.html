@@ -920,6 +920,23 @@
             }
         }
 
+        @media (max-width: 768px), (pointer: coarse) {
+            .ascii-snake__field {
+                animation: none !important;
+                opacity: 1;
+                text-shadow:
+                    0 0 4px rgba(255, 130, 170, 0.35),
+                    0 0 10px rgba(229, 13, 74, 0.22);
+            }
+
+            .ascii-snake__food {
+                animation: none !important;
+                text-shadow:
+                    0 0 8px rgba(120, 255, 230, 0.85),
+                    0 0 16px rgba(80, 240, 220, 0.45);
+            }
+        }
+
         @keyframes ascii-snake-field-pulse {
             0%,
             100% {
@@ -1919,10 +1936,11 @@
 
                 var W = 20;
                 var H = 11;
-                var tickMs = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 100 : 46;
+                var metricsCw = 8;
+                var metricsLh = 11;
                 var acc = 0;
                 var timePrev = 0;
-                var maxStepsPerFrame = 4;
+                var maxStepsPerFrame = 6;
                 var running = false;
                 var renderNeeded = false;
                 var gridBuf;
@@ -1957,6 +1975,60 @@
                     };
                 }
 
+                var mqMobileGrid = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+                if (mqMobileGrid.addEventListener) {
+                    mqMobileGrid.addEventListener("change", scheduleResize);
+                } else if (mqMobileGrid.addListener) {
+                    mqMobileGrid.addListener(scheduleResize);
+                }
+
+                function getTickMs() {
+                    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                        return 100;
+                    }
+                    if (!snake || !snake.length) {
+                        return 46;
+                    }
+                    var len = snake.length;
+                    var speedup = Math.min(24, Math.floor((len - 3) / 2) * 2);
+                    return Math.max(17, 46 - speedup);
+                }
+
+                function visualViewportClip() {
+                    var v = window.visualViewport;
+                    if (v && v.width > 0 && v.height > 0) {
+                        return {
+                            l: v.offsetLeft,
+                            t: v.offsetTop,
+                            r: v.offsetLeft + v.width,
+                            b: v.offsetTop + v.height
+                        };
+                    }
+                    return { l: 0, t: 0, r: window.innerWidth, b: window.innerHeight };
+                }
+
+                function cellFullyVisible(fc, fy) {
+                    var cw = metricsCw;
+                    var lh = metricsLh;
+                    var vr = viewport.getBoundingClientRect();
+                    var fw = W * cw;
+                    var fh = H * lh;
+                    var gL = vr.left + (vr.width - fw) * 0.5;
+                    var gT = vr.top + (vr.height - fh) * 0.5;
+                    var ml = gL + fc * cw;
+                    var mt = gT + fy * lh;
+                    var mr = ml + cw;
+                    var mb = mt + lh;
+                    var clip = visualViewportClip();
+                    var pad = 6;
+                    return (
+                        ml >= clip.l + pad &&
+                        mt >= clip.t + pad &&
+                        mr <= clip.r - pad &&
+                        mb <= clip.b - pad
+                    );
+                }
+
                 function resize() {
                     var box = playAreaBox();
                     var availW = box.w;
@@ -1967,11 +2039,16 @@
                     var lineH = fs;
                     var cw = measureCharWidth();
                     if (cw < 2) cw = fs * 0.58;
+                    metricsCw = cw;
+                    metricsLh = lineH;
                     var ow = W;
                     var oh = H;
                     var nW = Math.max(8, (availW / cw) | 0);
                     var nH = Math.max(6, (availH / lineH) | 0);
-                    if (nH > 100) nH = 100;
+                    var capW = mqMobileGrid.matches ? 88 : 200;
+                    var capH = mqMobileGrid.matches ? 52 : 100;
+                    if (nW > capW) nW = capW;
+                    if (nH > capH) nH = capH;
 
                     W = nW;
                     H = nH;
@@ -1979,6 +2056,15 @@
                     if (running && snake && (ow !== W || oh !== H)) {
                         reset();
                     }
+                }
+
+                var resizeFrame = 0;
+                function scheduleResize() {
+                    if (resizeFrame) return;
+                    resizeFrame = requestAnimationFrame(function () {
+                        resizeFrame = 0;
+                        resize();
+                    });
                 }
 
                 function escHtml(text) {
@@ -2051,10 +2137,8 @@
                 }
 
                 function placeFood() {
-                    var fs = parseFloat(window.getComputedStyle(field).fontSize) || 11;
-                    var lineH = fs;
-                    var cw = measureCharWidth();
-                    if (cw < 2) cw = fs * 0.58;
+                    var cw = metricsCw;
+                    var lineH = metricsLh;
                     var vr = viewport.getBoundingClientRect();
                     var fieldWidth = W * cw;
                     var fieldHeight = H * lineH;
@@ -2084,8 +2168,10 @@
                     var ok;
                     var si;
                     var avoidContent;
-                    for (pass = 0; pass < 2; pass++) {
+                    var requireVisible;
+                    for (pass = 0; pass < 3; pass++) {
                         avoidContent = pass === 0;
+                        requireVisible = pass < 2;
                         tries = 0;
                         while (tries < 500) {
                             fx = (Math.random() * W) | 0;
@@ -2096,6 +2182,9 @@
                                     ok = false;
                                     break;
                                 }
+                            }
+                            if (ok && requireVisible && !cellFullyVisible(fx, fy)) {
+                                ok = false;
                             }
                             if (ok && (!avoidContent || !cellOverlapsContentZone(fx, fy))) {
                                 food = { x: fx, y: fy };
@@ -2258,13 +2347,14 @@
                     }
                 })();
 
-                window.addEventListener("resize", resize);
+                window.addEventListener("resize", scheduleResize, false);
                 if (window.visualViewport) {
-                    window.visualViewport.addEventListener("resize", resize);
+                    window.visualViewport.addEventListener("resize", scheduleResize);
+                    window.visualViewport.addEventListener("scroll", scheduleResize);
                 }
                 if (typeof ResizeObserver !== "undefined") {
                     new ResizeObserver(function () {
-                        resize();
+                        scheduleResize();
                     }).observe(root);
                 }
 
@@ -2288,8 +2378,10 @@
                         acc += dt;
                     }
                     steps = 0;
-                    while (running && !gameOver && acc >= tickMs && steps < maxStepsPerFrame) {
-                        acc -= tickMs;
+                    while (running && !gameOver && steps < maxStepsPerFrame) {
+                        var stepTick = getTickMs();
+                        if (acc < stepTick) break;
+                        acc -= stepTick;
                         steps += 1;
                         step();
                     }
