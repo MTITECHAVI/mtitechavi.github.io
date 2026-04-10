@@ -921,6 +921,53 @@
             }
         }
 
+        .ascii-snake__food {
+            display: inline;
+            color: #9ff7e8;
+            font-weight: 700;
+            text-shadow:
+                0 0 6px rgba(120, 255, 230, 0.95),
+                0 0 14px rgba(80, 240, 220, 0.85),
+                0 0 26px rgba(40, 200, 190, 0.55),
+                0 0 42px rgba(229, 13, 74, 0.22);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .ascii-snake__food {
+                animation: ascii-snake-food-glow 1.35s ease-in-out infinite;
+            }
+        }
+
+        @keyframes ascii-snake-food-glow {
+            0%,
+            100% {
+                opacity: 1;
+                text-shadow:
+                    0 0 6px rgba(120, 255, 230, 0.95),
+                    0 0 14px rgba(80, 240, 220, 0.85),
+                    0 0 26px rgba(40, 200, 190, 0.55),
+                    0 0 42px rgba(229, 13, 74, 0.22);
+            }
+            50% {
+                opacity: 1;
+                text-shadow:
+                    0 0 10px rgba(180, 255, 245, 1),
+                    0 0 22px rgba(100, 250, 235, 0.95),
+                    0 0 38px rgba(60, 220, 205, 0.65),
+                    0 0 52px rgba(229, 13, 74, 0.28);
+            }
+        }
+
+        .ascii-snake__gameover-line {
+            color: rgba(232, 221, 216, 0.72);
+            font-family: var(--font-display);
+            font-size: clamp(0.58rem, min(1.4vw, 1.6vh), 0.72rem);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-shadow: var(--neon-text);
+        }
+
         .ascii-snake__score {
             position: absolute;
             z-index: 2;
@@ -941,15 +988,6 @@
             pointer-events: none;
         }
 
-        .ascii-snake__score--restart {
-            font-variant-numeric: normal;
-            letter-spacing: 0.1em;
-            font-size: clamp(0.65rem, 1.85vw, 0.88rem);
-            max-width: min(94vw, 22rem);
-            line-height: 1.35;
-            text-align: center;
-        }
-
         .ascii-snake__score[hidden] {
             display: none !important;
         }
@@ -958,6 +996,10 @@
             .ascii-snake__field {
                 animation: none;
                 opacity: 1;
+            }
+
+            .ascii-snake__food {
+                animation: none;
             }
         }
 
@@ -1565,7 +1607,7 @@
                 id="ascii-snake-viewport"
                 tabindex="0"
                 role="application"
-                aria-label="Press a key or tap to start. Then steer with arrows or W A S D. R restarts."
+                aria-label="Press a key or tap to start. Steer with arrows or W A S D. Edges wrap. R restarts."
             >
                 <pre class="ascii-snake__field" id="ascii-snake-field" aria-hidden="true"></pre>
             </div>
@@ -1806,6 +1848,7 @@
                 var viewport = document.getElementById("ascii-snake-viewport");
                 var scoreEl = document.getElementById("snake-score");
                 var root = document.getElementById("ascii-snake-root");
+                var contentZoneEl = document.querySelector(".content");
                 if (!field || !viewport || !scoreEl || !root) return;
 
                 var HIGH_STORAGE_KEY = "phikra-snake-highscore";
@@ -1846,7 +1889,6 @@
                 var food;
                 var score;
                 var gameOver;
-                var gameOverByWall = false;
 
                 function measureCharWidth() {
                     var style = window.getComputedStyle(field);
@@ -1885,7 +1927,6 @@
                     var oh = H;
                     var nW = Math.max(8, (availW / cw) | 0);
                     var nH = Math.max(6, (availH / lineH) | 0);
-                    if (nW > 200) nW = 200;
                     if (nH > 100) nH = 100;
 
                     W = nW;
@@ -1896,9 +1937,23 @@
                     }
                 }
 
+                function escHtml(text) {
+                    var out = "";
+                    var j;
+                    var c;
+                    for (j = 0; j < text.length; j++) {
+                        c = text.charAt(j);
+                        if (c === "&") out += "&amp;";
+                        else if (c === "<") out += "&lt;";
+                        else if (c === ">") out += "&gt;";
+                        else out += c;
+                    }
+                    return out;
+                }
+
                 function renderField() {
                     if (!running || !snake || !snake.length || !food) {
-                        field.textContent = "";
+                        field.innerHTML = "";
                         return;
                     }
                     var size = W * H;
@@ -1920,45 +1975,90 @@
                         gy = snake[k].y;
                         gridBuf[gy * W + gx] = k === 0 ? "@" : "o";
                     }
-                    var lines = [];
+                    var linesHtml = [];
                     var rowStart;
+                    var ch;
+                    var parts;
                     for (gy = 0; gy < H; gy++) {
                         rowStart = gy * W;
-                        lines.push(gridBuf.slice(rowStart, rowStart + W).join(""));
+                        parts = [];
+                        for (gx = 0; gx < W; gx++) {
+                            ch = gridBuf[rowStart + gx];
+                            if (ch === "*") {
+                                parts.push('<span class="ascii-snake__food">*</span>');
+                            } else {
+                                parts.push(escHtml(ch));
+                            }
+                        }
+                        linesHtml.push(parts.join(""));
                     }
-                    var text = lines.join("\n");
-                    if (gameOver && !gameOverByWall) {
-                        text += "\n\nGAME OVER — R to restart";
+                    var html = linesHtml.join("\n");
+                    if (gameOver) {
+                        html +=
+                            '<br><br><span class="ascii-snake__gameover-line">' +
+                            escHtml("GAME OVER — R to restart") +
+                            "</span>";
                     }
-                    field.textContent = text;
+                    field.innerHTML = html;
                 }
 
                 function setScoreDisplay() {
                     scoreEl.textContent = score + " · best " + highScore;
-                    scoreEl.classList.remove("ascii-snake__score--restart");
                 }
 
                 function placeFood() {
-                    var tries = 0;
+                    var fs = parseFloat(window.getComputedStyle(field).fontSize) || 11;
+                    var lineH = fs;
+                    var cw = measureCharWidth();
+                    if (cw < 2) cw = fs * 0.58;
+                    var vr = viewport.getBoundingClientRect();
+                    var fieldWidth = W * cw;
+                    var fieldHeight = H * lineH;
+                    var gridLeft = vr.left + (vr.width - fieldWidth) * 0.5;
+                    var gridTop = vr.top + (vr.height - fieldHeight) * 0.5;
+                    var cr = contentZoneEl ? contentZoneEl.getBoundingClientRect() : null;
+                    var hasContentZone = cr && cr.width > 0 && cr.height > 0;
+
+                    function cellOverlapsContentZone(fc, fy) {
+                        if (!hasContentZone) return false;
+                        var cellLeft = gridLeft + fc * cw;
+                        var cellTop = gridTop + fy * lineH;
+                        var cellRight = cellLeft + cw;
+                        var cellBottom = cellTop + lineH;
+                        return !(
+                            cellRight <= cr.left ||
+                            cellLeft >= cr.right ||
+                            cellBottom <= cr.top ||
+                            cellTop >= cr.bottom
+                        );
+                    }
+
+                    var pass;
+                    var tries;
                     var fx;
                     var fy;
                     var ok;
                     var si;
-                    while (tries < 500) {
-                        fx = (Math.random() * W) | 0;
-                        fy = (Math.random() * H) | 0;
-                        ok = true;
-                        for (si = 0; si < snake.length; si++) {
-                            if (snake[si].x === fx && snake[si].y === fy) {
-                                ok = false;
-                                break;
+                    var avoidContent;
+                    for (pass = 0; pass < 2; pass++) {
+                        avoidContent = pass === 0;
+                        tries = 0;
+                        while (tries < 500) {
+                            fx = (Math.random() * W) | 0;
+                            fy = (Math.random() * H) | 0;
+                            ok = true;
+                            for (si = 0; si < snake.length; si++) {
+                                if (snake[si].x === fx && snake[si].y === fy) {
+                                    ok = false;
+                                    break;
+                                }
                             }
+                            if (ok && (!avoidContent || !cellOverlapsContentZone(fx, fy))) {
+                                food = { x: fx, y: fy };
+                                return;
+                            }
+                            tries++;
                         }
-                        if (ok) {
-                            food = { x: fx, y: fy };
-                            return;
-                        }
-                        tries++;
                     }
                     food = { x: 0, y: 0 };
                 }
@@ -1972,13 +2072,8 @@
                     var nx = snake[0].x + dir.x;
                     var ny = snake[0].y + dir.y;
                     var i;
-                    if (nx < 0 || nx >= W || ny < 0 || ny >= H) {
-                        gameOver = true;
-                        gameOverByWall = true;
-                        scoreEl.textContent = "Press R to restart · best " + highScore;
-                        scoreEl.classList.add("ascii-snake__score--restart");
-                        return;
-                    }
+                    nx = ((nx % W) + W) % W;
+                    ny = ((ny % H) + H) % H;
                     var ate = nx === food.x && ny === food.y;
                     snake.unshift({ x: nx, y: ny });
                     if (!ate) {
@@ -1998,7 +2093,6 @@
                                 continue;
                             }
                             gameOver = true;
-                            gameOverByWall = false;
                             return;
                         }
                     }
@@ -2044,7 +2138,6 @@
                     nextDir = { x: dir.x, y: dir.y };
                     score = 0;
                     gameOver = false;
-                    gameOverByWall = false;
                     acc = 0;
                     setScoreDisplay();
                     placeFood();
