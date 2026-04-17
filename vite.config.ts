@@ -5,7 +5,8 @@ export default defineConfig({
   // Keeps asset URLs relative in built index.html.
   base: "./",
   build: {
-    outDir: "dist",
+    // GitHub Pages supports publishing from /docs on main branch.
+    outDir: "docs",
     assetsDir: "assets",
     sourcemap: false,
   },
